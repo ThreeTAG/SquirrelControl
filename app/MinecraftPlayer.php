@@ -10,11 +10,12 @@ use Illuminate\Support\Collection;
 /**
  * Class MinecraftPlayer
  * @package App
- * @property int id
+ * @property-read int id
  * @property string name
  * @property string uuid
  * @property Collection accessoires
  * @property CraftfallData craftfallData
+ * @property Patron patron
  */
 class MinecraftPlayer extends Model
 {
@@ -23,14 +24,25 @@ class MinecraftPlayer extends Model
         'uuid',
     ];
 
-    public function accessoires(): BelongsToMany
+    public function getAccessoiresAttribute()
     {
-        return $this->belongsToMany(Accessoire::class, 'minecraft_player_accessoires', 'player_id');
+        $accessoires = $this->morphToMany(Accessoire::class, 'accessoire_holder')->get();
+
+        if($this->patron && $this->patron->tier) {
+            $accessoires = $accessoires->merge($this->patron->tier->accessoires);
+        }
+
+        return $accessoires;
     }
 
     public function craftfallData(): HasOne
     {
         return $this->hasOne(CraftfallData::class, 'player_id');
+    }
+
+    public function patron(): HasOne
+    {
+        return $this->hasOne(Patron::class, 'player_id');
     }
 
 }

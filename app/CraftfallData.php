@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class CraftfallData
  * @package App
- * @property int id
+ * @property-read int id
  * @property int player_id
  * @property int money
  * @property MinecraftPlayer player

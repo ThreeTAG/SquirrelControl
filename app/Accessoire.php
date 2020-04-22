@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Accessoire
  * @package App
+ * @property-read int id
  * @property string name
  */
 class Accessoire extends Model
 {
     protected $fillable = [
-        'accessoire',
+        'name',
     ];
 }
