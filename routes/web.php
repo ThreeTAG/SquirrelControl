@@ -20,12 +20,17 @@ Route::get('/', function () {
 Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
+Route::group(['middleware' => ['web']], function () {
+    Route::get('/users', 'UserController@index')->name('users.index');
+    Route::get('/user/{user}', 'UserController@edit')->name('users.edit');
+    Route::post('/user/{user}', 'UserController@update')->name('users.update');
 
-Route::group(['middleware' => 'auth'], function () {
-	Route::resource('user', 'UserController', ['except' => ['show']]);
-	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
-	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
-	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
+    Route::get('/roles', 'RoleController@index')->name('roles.index');
+    Route::get('/role/{role}', 'RoleController@edit')->name('roles.edit');
+    Route::post('/role/{role}', 'RoleController@update')->name('roles.update');
+
+    Route::get('/minecraft-players', 'MinecraftPlayerController@index')->name('minecraft-players.index');
+    Route::post('/minecraft-players/add', 'MinecraftPlayerController@store')->name('minecraft-players.store');
+    Route::get('/minecraft-players/{player}', 'MinecraftPlayerController@edit')->name('minecraft-players.edit');
+    Route::post('/minecraft-players/{player}', 'MinecraftPlayerController@update')->name('minecraft-players.update');
 });
-

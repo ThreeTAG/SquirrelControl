@@ -5,27 +5,23 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Users</div>
+                    <div class="card-header">Roles</div>
 
                     <div class="card-body">
-                        <table class="table table-striped" id="userTable">
+                        <table class="table table-striped">
                             <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Roles</th>
+                                <th>Users</th>
                                 <th></th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($users as $user)
+                            @foreach($roles as $role)
                                 <tr>
-                                    <td>{!! $user->name !!}</td>
-                                    <td>
-                                        @foreach($user->roles as $role)
-                                            <span class="label">{!! $role->name !!}</span>
-                                        @endforeach
-                                    </td>
-                                    <td><a class="btn btn-primary" href="{!! route('users.edit', ['user' => $user->id]) !!}">Manage</a></td>
+                                    <td>{!! $role->name !!}</td>
+                                    <td>{!! $role->users->count() !!}</td>
+                                    <td><a class="btn btn-primary" href="{!! route('roles.edit', ['role' => $role->id]) !!}">Manage</a></td>
                                 </tr>
                             @endforeach
                             </tbody>

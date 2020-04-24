@@ -1,5 +1,7 @@
 <?php
 
+use Spatie\Permission\PermissionServiceProvider;
+
 return [
 
     /*
@@ -165,6 +167,8 @@ return [
         /*
          * Package Service Providers...
          */
+        PermissionServiceProvider::class,
+
 
         /*
          * Application Service Providers...

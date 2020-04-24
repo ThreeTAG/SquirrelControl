@@ -14,6 +14,7 @@ use Illuminate\Support\Collection;
  * @property string name
  * @property string uuid
  * @property Collection accessoires
+ * @property Collection allAccessoires
  * @property CraftfallData craftfallData
  * @property Patron patron
  */
@@ -24,7 +25,12 @@ class MinecraftPlayer extends Model
         'uuid',
     ];
 
-    public function getAccessoiresAttribute()
+    public function accessoires()
+    {
+        return $this->morphToMany(Accessoire::class, 'accessoire_holder');
+    }
+
+    public function getAllAccessoiresAttribute()
     {
         $accessoires = $this->morphToMany(Accessoire::class, 'accessoire_holder')->get();
 
