@@ -33,4 +33,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/minecraft-players/add', 'MinecraftPlayerController@store')->name('minecraft-players.store');
     Route::get('/minecraft-players/{player}', 'MinecraftPlayerController@edit')->name('minecraft-players.edit');
     Route::post('/minecraft-players/{player}', 'MinecraftPlayerController@update')->name('minecraft-players.update');
+
+    Route::get('/patreon', 'PatreonController@index')->name('patreon.index');
+    Route::get('/patreon/tier/{tier}', 'PatreonController@editTier')->name('patreon.tier.edit');
+    Route::post('/patreon/tier/{tier}', 'PatreonController@updateTier')->name('patreon.tier.update');
+    Route::post('/patreon/patron/{patron}', 'PatreonController@updatePatronPlayer')->name('patreon.patron.update');
 });

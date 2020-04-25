@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Accessoire;
+use App\Http\Helpers\MinecraftPlayerHelper;
 use App\Http\Helpers\MojangAPI;
 use App\MinecraftPlayer;
 use Illuminate\Contracts\Foundation\Application;
@@ -45,17 +46,11 @@ class MinecraftPlayerController extends Controller
     {
         $name = $request->get('name');
 
-        $uuid = MojangAPI::getUuid($name);
-
-        if ($uuid) {
-            MinecraftPlayer::create([
-                'name' => MojangAPI::getUsername($uuid),
-                'uuid' => MojangAPI::formatUuid($uuid),
-            ]);
-
-            Session::flash('success', 'User added!');
-        } else {
-            Session::flash('error', 'This user does not exist!');
+        try {
+            MinecraftPlayerHelper::getMinecraftPlayer($name);
+            Session::flash('success', 'Player added!');
+        } catch (\Exception $e) {
+            Session::flash('error', $e->getMessage());
         }
 
         return redirect()->route('minecraft-players.index');

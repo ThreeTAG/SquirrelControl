@@ -24,7 +24,7 @@
                         <form action="{!! route('minecraft-players.store') !!}" method="POST">
                             @csrf
 
-                            <label for="name">Add by Name:</label>
+                            <label for="name">Add by Name/UUID:</label>
                             <input type="text" class="form-control" id="name" name="name">
 
                             <button class="btn btn-success" type="submit">Save</button>
