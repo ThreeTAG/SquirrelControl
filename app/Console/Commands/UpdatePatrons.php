@@ -55,7 +55,7 @@ class UpdatePatrons extends Command
             $memberList = $apiClient->get_data('campaigns/' . $campaign['id'] . '/members', []);
             $this->processPatrons($apiClient, $memberList['data']);
 
-            while ($memberList['links'] && $memberList['links']['next']) {
+            while (isset($memberList['links']) && isset($memberList['links']['next'])) {
                 parse_str(parse_url($memberList['links']['next'], PHP_URL_QUERY), $params);
                 $memberList = $apiClient->get_data('campaigns/' . $campaign['id'] . '/members', $params);
                 $this->processPatrons($apiClient, $memberList['data']);

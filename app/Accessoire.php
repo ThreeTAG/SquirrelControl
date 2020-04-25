@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Accessoire extends Model
 {
+    public $timestamps = false;
+
     protected $fillable = [
         'name',
     ];

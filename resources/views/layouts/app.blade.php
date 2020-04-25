@@ -39,6 +39,7 @@
                         <li class="nav-item active"><a class="nav-link" href="{!! route('roles.index') !!}">Roles</a></li>
                         <li class="nav-item active"><a class="nav-link" href="{!! route('minecraft-players.index') !!}">Minecraft Players</a></li>
                         <li class="nav-item active"><a class="nav-link" href="{!! route('patreon.index') !!}">Patreon</a></li>
+                        <li class="nav-item active"><a class="nav-link" href="{!! route('accessoires.index') !!}">Accessoires</a></li>
                     @endif
                 </ul>
 

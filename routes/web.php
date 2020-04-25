@@ -38,4 +38,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/patreon/tier/{tier}', 'PatreonController@editTier')->name('patreon.tier.edit');
     Route::post('/patreon/tier/{tier}', 'PatreonController@updateTier')->name('patreon.tier.update');
     Route::post('/patreon/patron/{patron}', 'PatreonController@updatePatronPlayer')->name('patreon.patron.update');
+
+    Route::get('/accessoires', 'AccessoireController@index')->name('accessoires.index');
+    Route::post('/accessoires/add', 'AccessoireController@store')->name('accessoires.store');
+    Route::post('/accessoires/{accessoire}/delete', 'AccessoireController@destroy')->name('accessoires.destroy');
 });
