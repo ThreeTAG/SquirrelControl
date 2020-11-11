@@ -67,7 +67,7 @@ class MinecraftPlayerController extends Controller
         // map function for the vue-treeselect
         $mapForTreeSelect = function ($model) {
             return [
-                'id'    => $model->id,
+                'id' => $model->id,
                 'label' => $model->name
             ];
         };
@@ -89,13 +89,33 @@ class MinecraftPlayerController extends Controller
     {
         $player->accessoires()->sync($request->get('accessoires'));
 
-        $file = $request->file('cloak');
-        $file->store()
-
         $player->getOrCreateModSupporterData()->update([
             'mod_access' => $request->get('mod_access'),
         ]);
 
+        if ($request->has('cloak_file') && $request->file('cloak_file')->isValid()) {
+            $request->validate([
+                'cloak_file' => 'mimes:png|max:1014',
+            ]);
+            $file = $request->file('cloak_file');
+            self::prepareCloakImagesFolder();
+            $file->store('', ['disk' => 'cloaks']);
+            $player->getOrCreateModSupporterData()->update([
+                'cloak_path' => $file->hashName(),
+            ]);
+        }
+
         return redirect()->route('minecraft-players.index');
+    }
+
+    public static function prepareCloakImagesFolder()
+    {
+        $folderPath = public_path('img/cloaks/');
+
+        if (!file_exists($folderPath)) {
+            mkdir($folderPath, 0777, true);
+        }
+
+        return $folderPath;
     }
 }

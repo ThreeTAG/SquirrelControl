@@ -15,6 +15,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ModSupporterData extends Model
 {
+    public $timestamps = false;
+
     protected $fillable = [
         'player_id',
         'mod_access',

@@ -14,7 +14,7 @@ class AddModAccessColumnToPatronTiersTable extends Migration
     public function up()
     {
         Schema::table('patron_tiers', function (Blueprint $table) {
-            $table->boolean('mod_access')->default(false)->nullable();
+            $table->boolean('mod_access')->default(false)->nullable()->after('name');
         });
     }
 

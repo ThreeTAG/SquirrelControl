@@ -17,8 +17,10 @@ class MinecraftPlayerController extends Controller
             $data = [
                 'accessoires' => $player->accessoires->pluck('name')->toArray(),
                 'mod_access' => $player->hasModAccess(),
-                'cloak' => '',
             ];
+            if ($player->getOrCreateModSupporterData()->cloak_path) {
+                $data['cloak'] = asset('img/cloaks/' . $player->getOrCreateModSupporterData()->cloak_path);
+            }
             return $response->setError(200)->addData($data);
         } else {
             return $response->setError(404)->setMessage('no player with that UUID');

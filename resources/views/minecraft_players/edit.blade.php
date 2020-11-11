@@ -20,17 +20,35 @@
                         @endif
 
                         <form action="{!! route('minecraft-players.update', ['player' => $player->id]) !!}"
-                              method="POST">
+                              method="POST" enctype="multipart/form-data">
                             @csrf
 
-                            <label for="accessoires">Accessoires:</label>
-                            <multi-select
-                                id="accessoires"
-                                name="accessoires[]"
-                                :options="{{$allAccessoires}}"
-                                :value="{{$playerAccessoires}}"
-                            >
-                            </multi-select>
+                            <div class="form-group">
+                                <label for="mod_access">Mod Access:</label>
+                                <input type="checkbox" id="mod_access" name="mod_access"
+                                       value="1" {!! $player->getOrCreateModSupporterData()->mod_access ? 'checked' : '' !!}>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="cloak_file">Supporter Cloak Image:</label>
+                                <input type="file" id="cloak_file" name="cloak_file">
+                                @if($player->getOrCreateModSupporterData()->cloak_path)
+                                    <br>
+                                    <img
+                                        src="{!! asset('img/cloaks/' . $player->getOrCreateModSupporterData()->cloak_path) !!}">
+                                @endif
+                            </div>
+
+                            <div class="form-group">
+                                <label for="accessoires">Accessoires:</label>
+                                <multi-select
+                                    id="accessoires"
+                                    name="accessoires[]"
+                                    :options="{{$allAccessoires}}"
+                                    :value="{{$playerAccessoires}}"
+                                >
+                                </multi-select>
+                            </div>
 
                             <hr>
 
