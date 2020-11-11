@@ -17,6 +17,5 @@ class AccessoireSeeder extends Seeder
         Accessoire::create(['name' => 'threecore:wooden_leg']);
         Accessoire::create(['name' => 'threecore:hyperion_arm']);
         Accessoire::create(['name' => 'threecore:strawhat']);
-        Accessoire::create(['name' => 'threecore:jay_garrick_helmet']);
     }
 }

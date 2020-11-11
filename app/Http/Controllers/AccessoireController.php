@@ -25,16 +25,17 @@ class AccessoireController extends Controller
 
     public function store(Request $request)
     {
-        $accessoire = Accessoire::whereName($request->get('name'))->first();
-
-        if ($accessoire) {
-            Session::flash('error', 'An accessoire with that name already exists!');
-        } else {
-            Accessoire::create([
-                'name' => $request->get('name'),
-            ]);
-            Session::flash('success', 'Accessoire added!');
+        $i = 0;
+        foreach (explode(',', $request->get('name')) as $accessoire) {
+            if ($accessoire && !Accessoire::whereName($accessoire)->exists()) {
+                Accessoire::create([
+                    'name' => $accessoire,
+                ]);
+                $i++;
+            }
         }
+
+        Session::flash('success', $i . ' accessoires added!');
 
         return redirect()->back();
     }
