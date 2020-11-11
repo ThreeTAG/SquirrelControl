@@ -11,11 +11,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @package App
  * @property-read int id
  * @property string name
- * @property int tier_id
- * @property PatronTier tier
+ * @property int|null tier_id
+ * @property PatronTier|null tier
  * @property DateTime interval_start
  * @property int player_id
- * @property MinecraftPlayer player
+ * @property MinecraftPlayer|null player
  */
 class Patron extends Model
 {

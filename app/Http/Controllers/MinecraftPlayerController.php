@@ -89,6 +89,13 @@ class MinecraftPlayerController extends Controller
     {
         $player->accessoires()->sync($request->get('accessoires'));
 
+        $file = $request->file('cloak');
+        $file->store()
+
+        $player->getOrCreateModSupporterData()->update([
+            'mod_access' => $request->get('mod_access'),
+        ]);
+
         return redirect()->route('minecraft-players.index');
     }
 }

@@ -9,14 +9,16 @@ use Illuminate\Support\Collection;
 /**
  * Class PatronTier
  * @package App
- * @property-read int id
- * @property string name
- * @property Collection accessoires
+ * @property-read $int id
+ * @property $string name
+ * @property boolean $mod_access
+ * @property-read $Collection accessoires
  */
 class PatronTier extends Model
 {
     protected $fillable = [
         'name',
+        'mod_access',
     ];
 
     public function accessoires(): BelongsToMany

@@ -14,4 +14,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/player/{uuid}/accessoires', 'MinecraftPlayerController@getAccessoires');
+Route::get('/player/{uuid}', 'MinecraftPlayerController@getData');
