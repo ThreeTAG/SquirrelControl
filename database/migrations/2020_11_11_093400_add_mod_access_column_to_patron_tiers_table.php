@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddModAccessColumnToPatronTierTable extends Migration
+class AddModAccessColumnToPatronTiersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class AddModAccessColumnToPatronTierTable extends Migration
      */
     public function up()
     {
-        Schema::table('patron_tier', function (Blueprint $table) {
+        Schema::table('patron_tiers', function (Blueprint $table) {
             $table->boolean('mod_access')->default(false)->nullable();
         });
     }
@@ -25,7 +25,7 @@ class AddModAccessColumnToPatronTierTable extends Migration
      */
     public function down()
     {
-        Schema::table('patron_tier', function (Blueprint $table) {
+        Schema::table('patron_tiers', function (Blueprint $table) {
             $table->dropColumn('mod_access');
         });
     }
