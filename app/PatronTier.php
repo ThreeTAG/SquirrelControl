@@ -12,7 +12,7 @@ use Illuminate\Support\Collection;
  * @property-read $int id
  * @property $string name
  * @property boolean $mod_access
- * @property-read $Collection accessoires
+ * @property-read Accessoire[]|Collection accessoires
  */
 class PatronTier extends Model
 {

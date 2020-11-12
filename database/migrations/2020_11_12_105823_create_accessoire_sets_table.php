@@ -19,10 +19,10 @@ class CreateAccessoireSetsTable extends Migration
         });
 
         Schema::create('minecraft_player_has_accessoire_sets', function (Blueprint $table) {
-            $table->unsignedBigInteger('player_id');
+            $table->unsignedBigInteger('minecraft_player_id');
             $table->unsignedBigInteger('accessoire_set_id');
 
-            $table->foreign('player_id')->references('id')->on('minecraft_players')->onDelete('cascade');
+            $table->foreign('minecraft_player_id')->references('id')->on('minecraft_players')->onDelete('cascade');
             $table->foreign('accessoire_set_id')->references('id')->on('accessoire_sets')->onDelete('cascade');
         });
     }

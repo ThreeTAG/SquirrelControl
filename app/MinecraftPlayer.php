@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Collection;
 
 /**
@@ -14,9 +15,9 @@ use Illuminate\Support\Collection;
  * @property-read int $id
  * @property string $name
  * @property string $uuid
- * @property-read Accessoire[] $accessoires
- * @property-read AccessoireSet[] $accessoireSets
- * @property-read Accessoire[] $allAccessoires
+ * @property-read Accessoire[]|Collection $accessoires
+ * @property-read AccessoireSet[]|Collection $accessoireSets
+ * @property-read Accessoire[]|Collection $allAccessoires
  * @property-read ModSupporterData|null $modSupporterData
  * @property-read CraftfallData|null $craftfallData
  * @property-read Patron|null $patron
@@ -28,7 +29,7 @@ class MinecraftPlayer extends Model
         'uuid',
     ];
 
-    public function accessoires(): MorphMany
+    public function accessoires(): MorphToMany
     {
         return $this->morphToMany(Accessoire::class, 'accessoire_holder');
     }

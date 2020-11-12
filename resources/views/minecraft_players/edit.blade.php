@@ -9,15 +9,7 @@
 
                     <div class="card-body">
 
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
+                        @include('partials.errors')
 
                         <form action="{!! route('minecraft-players.update', ['player' => $player->id]) !!}"
                               method="POST" enctype="multipart/form-data">
@@ -46,6 +38,17 @@
                                     name="accessoires[]"
                                     :options="{{$allAccessoires}}"
                                     :value="{{$playerAccessoires}}"
+                                >
+                                </multi-select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="accessoires">Accessoire Sets:</label>
+                                <multi-select
+                                    id="accessoire_sets"
+                                    name="accessoire_sets[]"
+                                    :options="{{$allAccessoireSets}}"
+                                    :value="{{$playerAccessoireSets}}"
                                 >
                                 </multi-select>
                             </div>

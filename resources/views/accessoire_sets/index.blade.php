@@ -9,12 +9,12 @@
 
                     <div class="card-body">
 
-                        @include('partials.error-success-info')
+                       @include('partials.error-success-info')
 
-                        <form action="{!! route('minecraft-players.store') !!}" method="POST">
+                        <form action="{!! route('accessoires.sets.store') !!}" method="POST">
                             @csrf
 
-                            <label for="name">Add by Name/UUID:</label>
+                            <label for="name">Add Accessoire Set:</label>
                             <input type="text" class="form-control" id="name" name="name">
 
                             <button class="btn btn-success" type="submit">Save</button>
@@ -23,22 +23,22 @@
 
                         <hr>
 
+                        {!! $sets->links() !!}
+
                         <table class="table table-striped" id="userTable">
                             <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>UUID</th>
+                                <th>Accessoires</th>
                                 <th></th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($players as $player)
+                            @foreach($sets as $set)
                                 <tr>
-                                    <td>{!! $player->name !!}</td>
-                                    <td>{!! $player->uuid !!}</td>
-                                    <td><a class="btn btn-primary"
-                                           href="{!! route('minecraft-players.edit', ['player' => $player->id]) !!}">Manage</a>
-                                    </td>
+                                    <td>{!! $set->name !!}</td>
+                                    <td>{!! $set->accessoires->count() !!}</td>
+                                    <td><a class="btn btn-primary" href="{!! route('accessoires.sets.edit', ['set' => $set->id]) !!}">Manage</a></td>
                                 </tr>
                             @endforeach
                             </tbody>

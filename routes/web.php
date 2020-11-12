@@ -40,4 +40,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/accessoires', 'AccessoireController@index')->name('accessoires.index');
     Route::post('/accessoires/add', 'AccessoireController@store')->name('accessoires.store');
     Route::post('/accessoires/{accessoire}/delete', 'AccessoireController@destroy')->name('accessoires.destroy');
+
+    Route::get('/accessoires/sets', 'AccessoireSetController@index')->name('accessoires.sets.index');
+    Route::post('/accessoires/sets/add', 'AccessoireSetController@store')->name('accessoires.sets.store');
+    Route::get('/accessoires/sets/{set}', 'AccessoireSetController@edit')->name('accessoires.sets.edit');
+    Route::post('/accessoires/sets/{set}', 'AccessoireSetController@update')->name('accessoires.sets.update');
 });
