@@ -27,4 +27,26 @@ class MinecraftPlayerController extends Controller
         }
     }
 
+    public function getLegacyData(Response $response)
+    {
+        $supporters = [];
+
+        foreach (MinecraftPlayer::all() as $player) {
+            if ($player->hasModAccess() || $player->getOrCreateModSupporterData()->cloak_path) {
+                $data = [
+                    'name' => $player->name,
+                    'uuid' => $player->uuid,
+                    'access' => $player->hasModAccess(),
+                ];
+
+                if ($player->getOrCreateModSupporterData()->cloak_path) {
+                    $data['cloak'] = asset('img/cloaks/' . $player->getOrCreateModSupporterData()->cloak_path);
+                }
+                $supporters[] = $data;
+            }
+        }
+
+        return $response->setError(200)->addData(['supporters' => $supporters]);
+    }
+
 }
