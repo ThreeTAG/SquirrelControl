@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Collection;
 
 /**
@@ -13,8 +15,9 @@ use Illuminate\Support\Collection;
  * @property-read int $id
  * @property string $name
  * @property string $uuid
- * @property-read Collection $accessoires
- * @property-read Collection $allAccessoires
+ * @property-read Accessoire[]|Collection $accessoires
+ * @property-read AccessoireSet[]|Collection $accessoireSets
+ * @property-read Accessoire[]|Collection $allAccessoires
  * @property-read ModSupporterData|null $modSupporterData
  * @property-read CraftfallData|null $craftfallData
  * @property-read Patron|null $patron
@@ -26,29 +29,38 @@ class MinecraftPlayer extends Model
         'uuid',
     ];
 
-    public function accessoires()
+    public function accessoires(): MorphToMany
     {
         return $this->morphToMany(Accessoire::class, 'accessoire_holder');
+    }
+
+    public function accessoireSets(): BelongsToMany
+    {
+        return $this->belongsToMany(AccessoireSet::class, 'minecraft_player_has_accessoire_sets');
     }
 
     public function getAllAccessoiresAttribute()
     {
         $accessoires = $this->morphToMany(Accessoire::class, 'accessoire_holder')->get();
 
-        if($this->patron && $this->patron->tier) {
+        if ($this->patron && $this->patron->tier) {
             $accessoires = $accessoires->merge($this->patron->tier->accessoires);
         }
 
-        return $accessoires;
+        foreach ($this->accessoireSets as $accessoireSet) {
+            $accessoires = $accessoires->merge($accessoireSet->accessoires);
+        }
+
+        return $accessoires->unique('id');
     }
 
-    public function hasModAccess()
+    public function hasModAccess(): bool
     {
-        if($this->modSupporterData && $this->modSupporterData->mod_access) {
+        if ($this->modSupporterData && $this->modSupporterData->mod_access) {
             return true;
         }
 
-        if($this->patron && $this->patron->tier && $this->patron->tier->mod_access) {
+        if ($this->patron && $this->patron->tier && $this->patron->tier->mod_access) {
             return true;
         }
 
@@ -70,12 +82,12 @@ class MinecraftPlayer extends Model
         return $this->hasOne(Patron::class, 'player_id');
     }
 
-    public function getOrCreateModSupporterData()
+    public function getOrCreateModSupporterData(): ModSupporterData
     {
         return $this->modSupporterData ?? $this->modSupporterData()->create();
     }
 
-    public function getOrCreateCraftfallData()
+    public function getOrCreateCraftfallData(): CraftfallData
     {
         return $this->craftfallData ?? $this->craftfallData()->create();
     }

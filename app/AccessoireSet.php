@@ -7,18 +7,18 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Collection;
 
 /**
- * Class PatronTier
+ * Class AccessoireSet
  * @package App
- * @property-read $int id
- * @property $string name
- * @property boolean $mod_access
- * @property-read Accessoire[]|Collection accessoires
+ * @property-read int $id
+ * @property string $name
+ * @property-read Accessoire[]|Collection $accessoires
  */
-class PatronTier extends Model
+class AccessoireSet extends Model
 {
+    public $timestamps = false;
+
     protected $fillable = [
         'name',
-        'mod_access',
     ];
 
     public function accessoires(): BelongsToMany
