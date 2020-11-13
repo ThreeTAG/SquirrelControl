@@ -19,7 +19,6 @@ class CreateModSupporterDataTable extends Migration
             $table->boolean('mod_access')->default(false)->nullable();
             $table->string('cloak_path')->nullable();
 
-
             $table->foreign('player_id')->references('id')->on('minecraft_players');
         });
     }

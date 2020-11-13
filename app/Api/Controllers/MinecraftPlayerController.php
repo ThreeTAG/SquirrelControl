@@ -15,7 +15,7 @@ class MinecraftPlayerController extends Controller
 
         if ($player) {
             $data = [
-                'accessoires' => $player->accessoires->pluck('name')->toArray(),
+                'accessoires' => $player->allAccessoires->pluck('name')->toArray(),
                 'mod_access' => $player->hasModAccess(),
             ];
             if ($player->getOrCreateModSupporterData()->cloak_path) {
