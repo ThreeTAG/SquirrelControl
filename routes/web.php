@@ -28,7 +28,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/role/{role}', 'RoleController@update')->name('roles.update');
 
     Route::get('/minecraft-players', 'MinecraftPlayerController@index')->name('minecraft-players.index');
-    Route::get('/minecraft-players/search/{search}', 'MinecraftPlayerController@query')->name('minecraft-players.search');
+    Route::get('/minecraft-players/search/{search?}', 'MinecraftPlayerController@search')->name('minecraft-players.search');
     Route::post('/minecraft-players/add', 'MinecraftPlayerController@store')->name('minecraft-players.store');
     Route::get('/minecraft-players/{player}', 'MinecraftPlayerController@edit')->name('minecraft-players.edit');
     Route::post('/minecraft-players/{player}', 'MinecraftPlayerController@update')->name('minecraft-players.update');

@@ -34,7 +34,7 @@
                                 <th></th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="table-content">
                             @include('minecraft_players.table_rows', compact('players'))
                             </tbody>
                         </table>
@@ -48,12 +48,12 @@
 @section('script')
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#main_cost_carrier').on('input propertychange', function () {
+            $('#player-search').on('input propertychange', function () {
                 $.ajax({
                     method: "GET",
                     url: "/minecraft-players/search/" + $(this).val(),
                 }).done(function (msg) {
-                    $('#player-search').html(msg);
+                    $('#table-content').html(msg);
                 });
             });
         });

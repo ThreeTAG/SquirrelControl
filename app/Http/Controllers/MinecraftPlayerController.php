@@ -32,7 +32,7 @@ class MinecraftPlayerController extends Controller
      */
     public function index()
     {
-        $players = MinecraftPlayer::all();
+        $players = MinecraftPlayer::query()->paginate(30);
 
         return view('minecraft_players.index', compact('players'));
     }
@@ -41,10 +41,14 @@ class MinecraftPlayerController extends Controller
      * @param $search
      * @return Application|Factory|View
      */
-    public function search($search)
+    public function search($search = null)
     {
-        $players = MinecraftPlayer::where('name', 'like', "%" . $search . "%")
-            ->orWhere('uuid', 'like', "%" . $search . "%");
+        if($search) {
+            $players = MinecraftPlayer::where('name', 'like', "%" . $search . "%")
+                ->orWhere('uuid', 'like', "%" . $search . "%")->get();
+        } else {
+            $players = MinecraftPlayer::all();
+        }
 
         return view('minecraft_players.table_rows', compact('players'));
     }
