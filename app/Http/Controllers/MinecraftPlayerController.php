@@ -38,6 +38,18 @@ class MinecraftPlayerController extends Controller
     }
 
     /**
+     * @param $search
+     * @return Application|Factory|View
+     */
+    public function search($search)
+    {
+        $players = MinecraftPlayer::where('name', 'like', "%" . $search . "%")
+            ->orWhere('uuid', 'like', "%" . $search . "%");
+
+        return view('minecraft_players.table_rows', compact('players'));
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param Request $request

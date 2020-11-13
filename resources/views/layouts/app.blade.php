@@ -12,12 +12,16 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
-    <!-- Fonts -->
+@yield('script')
+
+<!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
+
+    @yield('css')
 </head>
 <body>
 <div id="app">
@@ -35,11 +39,16 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
                     @if(!auth()->guest())
-                        <li class="nav-item active"><a class="nav-link" href="{!! route('users.index') !!}">Users</a></li>
-                        <li class="nav-item active"><a class="nav-link" href="{!! route('roles.index') !!}">Roles</a></li>
-                        <li class="nav-item active"><a class="nav-link" href="{!! route('minecraft-players.index') !!}">Minecraft Players</a></li>
-                        <li class="nav-item active"><a class="nav-link" href="{!! route('patreon.index') !!}">Patreon</a></li>
-                        <li class="nav-item active"><a class="nav-link" href="{!! route('accessoires.index') !!}">Accessoires</a></li>
+                        <li class="nav-item active"><a class="nav-link" href="{!! route('users.index') !!}">Users</a>
+                        </li>
+                        <li class="nav-item active"><a class="nav-link" href="{!! route('roles.index') !!}">Roles</a>
+                        </li>
+                        <li class="nav-item active"><a class="nav-link" href="{!! route('minecraft-players.index') !!}">Minecraft
+                                Players</a></li>
+                        <li class="nav-item active"><a class="nav-link"
+                                                       href="{!! route('patreon.index') !!}">Patreon</a></li>
+                        <li class="nav-item active"><a class="nav-link" href="{!! route('accessoires.index') !!}">Accessoires</a>
+                        </li>
                     @endif
                 </ul>
 

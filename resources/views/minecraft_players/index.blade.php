@@ -23,24 +23,19 @@
 
                         <hr>
 
+                        <input type="text" class="form-control" id="player-search" placeholder="Search...">
+
                         <table class="table table-striped" id="userTable">
                             <thead>
                             <tr>
                                 <th>Name</th>
                                 <th>UUID</th>
+                                <th>Patron</th>
                                 <th></th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($players as $player)
-                                <tr>
-                                    <td>{!! $player->name !!}</td>
-                                    <td>{!! $player->uuid !!}</td>
-                                    <td><a class="btn btn-primary"
-                                           href="{!! route('minecraft-players.edit', ['player' => $player->id]) !!}">Manage</a>
-                                    </td>
-                                </tr>
-                            @endforeach
+                            @include('minecraft_players.table_rows', compact('players'))
                             </tbody>
                         </table>
                     </div>
@@ -48,4 +43,19 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#main_cost_carrier').on('input propertychange', function () {
+                $.ajax({
+                    method: "GET",
+                    url: "/minecraft-players/search/" + $(this).val(),
+                }).done(function (msg) {
+                    $('#player-search').html(msg);
+                });
+            });
+        });
+    </script>
 @endsection
