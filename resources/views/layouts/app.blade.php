@@ -32,21 +32,7 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <!-- Left Side Of Navbar -->
-                <ul class="navbar-nav mr-auto">
-                    @if(!auth()->guest())
-                        <li class="nav-item active"><a class="nav-link" href="{!! route('users.index') !!}">Users</a>
-                        </li>
-                        <li class="nav-item active"><a class="nav-link" href="{!! route('roles.index') !!}">Roles</a>
-                        </li>
-                        <li class="nav-item active"><a class="nav-link" href="{!! route('minecraft-players.index') !!}">Minecraft
-                                Players</a></li>
-                        <li class="nav-item active"><a class="nav-link"
-                                                       href="{!! route('patreon.index') !!}">Patreon</a></li>
-                        <li class="nav-item active"><a class="nav-link" href="{!! route('accessoires.index') !!}">Accessoires</a>
-                        </li>
-                    @endif
-                </ul>
+                @yield('navbar')
 
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
