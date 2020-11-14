@@ -9,11 +9,11 @@ use Illuminate\Support\Collection;
 use Spatie\Permission\Traits\HasRoles;
 
 /**
- * @property-read int id
- * @property string name
- * @property string email
- * @property-read Collection roles
- * @property-read Collection permissions
+ * @property-read int $id
+ * @property string $name
+ * @property string $email
+ * @property-read Collection $roles
+ * @property-read Collection $permissions
  */
 class User extends Authenticatable
 {
