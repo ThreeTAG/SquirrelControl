@@ -15,6 +15,8 @@ use Illuminate\Support\Collection;
  */
 class Warp extends Model
 {
+    public $table = 'cf_warps';
+
     protected $fillable = [
         'name',
         'dimension',
