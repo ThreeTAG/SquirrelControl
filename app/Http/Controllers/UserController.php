@@ -49,7 +49,7 @@ class UserController extends Controller
         };
 
         $allRoles = Role::all()->map($mapForTreeSelect);
-        $allPermissions = Permission::all()->map($mapForTreeSelect);
+        $allPermissions = Permission::where('guard_name', 'web')->get()->map($mapForTreeSelect);
 
         $userRoles = $user->roles->map($mapForTreeSelect)->pluck('id');
         $userPermissions = $user->permissions->map($mapForTreeSelect)->pluck('id');

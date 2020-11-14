@@ -44,7 +44,7 @@ class RoleController extends Controller
             ];
         };
 
-        $allPermissions = Permission::all()->map($mapForTreeSelect);
+        $allPermissions = Permission::where('guard_name', 'web')->get()->map($mapForTreeSelect);
 
         $rolePermissions = $role->permissions->map($mapForTreeSelect)->pluck('id');
 
