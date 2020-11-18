@@ -4,10 +4,13 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Roles</div>
+                <div class="card bg-light">
+                    <h3 class="card-header">Roles</h3>
 
                     <div class="card-body">
+
+                        @include('partials.error-success-info')
+
                         <table class="table table-striped">
                             <thead>
                             <tr>

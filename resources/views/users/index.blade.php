@@ -4,8 +4,8 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Users</div>
+                <div class="card bg-light">
+                    <h3 class="card-header">Users</h3>
 
                     <div class="card-body">
                         <table class="table table-striped" id="userTable">
@@ -22,7 +22,7 @@
                                     <td>{!! $user->name !!}</td>
                                     <td>
                                         @foreach($user->roles as $role)
-                                            <span class="label">{!! $role->name !!}</span>
+                                            <span class="badge badge-secondary">{!! $role->name !!}</span>
                                         @endforeach
                                     </td>
                                     <td><a class="btn btn-primary" href="{!! route('users.edit', ['user' => $user->id]) !!}">Manage</a></td>

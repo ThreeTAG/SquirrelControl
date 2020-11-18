@@ -4,32 +4,35 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{!! $role->name !!}</div>
+                <div class="card bg-light">
+                    <h3 class="card-header">{!! $role->name !!}</h3>
 
                     <div class="card-body">
 
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
+                        @include('partials.errors')
 
                         <form action="{!! route('roles.update', ['role' => $role->id]) !!}" method="POST">
                             @csrf
 
-                            <label for="permissions">Permissions:</label>
-                            <multi-select
-                                id="permissions"
-                                name="permissions[]"
-                                :options="{{$allPermissions}}"
-                                :value="{{$rolePermissions}}"
-                            >
-                            </multi-select>
+                            <div class="form-group">
+                                <div class="floating-label textfield-box">
+                                    <label for="name">Name</label>
+                                    <input class="form-control" id="name"
+                                           placeholder="Name" type="text" value="{!! $role->name !!}">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="permissions">Permissions:</label>
+                                <multi-select
+                                    id="permissions"
+                                    name="permissions[]"
+                                    class="form-control"
+                                    :options="{{$allPermissions}}"
+                                    :value="{{$rolePermissions}}"
+                                >
+                                </multi-select>
+                            </div>
 
                             <hr>
 

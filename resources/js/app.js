@@ -8,7 +8,6 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-console.log("lol");
 window.$ = require('jquery');
 
 /**
