@@ -4,8 +4,8 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{!! $set->name !!}</div>
+                <div class="card bg-light">
+                    <h3 class="card-header">{!! $set->name !!}</h3>
 
                     <div class="card-body">
 
@@ -16,8 +16,11 @@
                             @csrf
 
                             <div class="form-group">
-                                <label for="name">Name:</label>
-                                <input type="text" id="name" name="name" class="form-control" value="{!! $set->name !!}">
+                                <div class="floating-label textfield-box">
+                                    <label for="name">Name</label>
+                                    <input class="form-control" id="name"
+                                           placeholder="Name" type="text" value="{!! $set->name !!}">
+                                </div>
                             </div>
 
                             <div class="form-group">

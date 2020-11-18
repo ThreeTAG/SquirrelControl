@@ -4,8 +4,8 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Patreon</div>
+                <div class="card bg-light">
+                    <h3 class="card-header">Patreon</h3>
 
                     <div class="card-body">
 

@@ -4,30 +4,29 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Accessoires</div>
+                <div class="card bg-light">
+                    <h3 class="card-header">Accessoires</h3>
 
                     <div class="card-body">
 
-                        @if(\Illuminate\Support\Facades\Session::has('success'))
-                            <div class="alert alert-success">
-                                {!! \Illuminate\Support\Facades\Session::get('success') !!}
-                            </div>
-                        @endif
-
-                        @if(\Illuminate\Support\Facades\Session::has('error'))
-                            <div class="alert alert-danger">
-                                {!! \Illuminate\Support\Facades\Session::get('error') !!}
-                            </div>
-                        @endif
+                        @include('partials.error-success-info')
 
                         <form action="{!! route('accessoires.store') !!}" method="POST">
                             @csrf
 
-                            <label for="name">Add Accessoire:</label>
-                            <input type="text" class="form-control" id="name" name="name">
+                            <div class="row">
+                                <div class="col-md-5 mb-3 form-group">
+                                    <div class="floating-label textfield-box">
+                                        <label for="name">Add Accessoire</label>
+                                        <input class="form-control" id="name"
+                                               placeholder="ID" type="text">
+                                    </div>
+                                </div>
 
-                            <button class="btn btn-success" type="submit">Save</button>
+                                <div class="col-md-3 mb-3">
+                                    <button class="btn btn-success" type="submit">Add</button>
+                                </div>
+                            </div>
 
                         </form>
 

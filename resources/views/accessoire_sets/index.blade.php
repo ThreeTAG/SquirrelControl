@@ -4,8 +4,8 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Accessoire Sets</div>
+                <div class="card bg-light">
+                    <h3 class="card-header">Accessoire Sets</h3>
 
                     <div class="card-body">
 
@@ -14,10 +14,19 @@
                         <form action="{!! route('accessoires.sets.store') !!}" method="POST">
                             @csrf
 
-                            <label for="name">Add Accessoire Set:</label>
-                            <input type="text" class="form-control" id="name" name="name">
+                            <div class="row">
+                                <div class="col-md-5 mb-3 form-group">
+                                    <div class="floating-label textfield-box">
+                                        <label for="name">Add Accessoire Set</label>
+                                        <input class="form-control" id="name"
+                                               placeholder="Name" type="text">
+                                    </div>
+                                </div>
 
-                            <button class="btn btn-success" type="submit">Save</button>
+                                <div class="col-md-3 mb-3">
+                                    <button class="btn btn-success" type="submit">Add</button>
+                                </div>
+                            </div>
 
                         </form>
 

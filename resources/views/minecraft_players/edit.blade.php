@@ -4,8 +4,8 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{!! $player->name !!}</div>
+                <div class="card bg-light">
+                    <h3 class="card-header">{!! $player->name !!}</h3>
 
                     <div class="card-body">
 
@@ -15,15 +15,16 @@
                               method="POST" enctype="multipart/form-data">
                             @csrf
 
-                            <div class="form-group">
-                                <label for="mod_access">Mod Access:</label>
-                                <input type="checkbox" id="mod_access" name="mod_access"
-                                       value="1" {!! $player->getOrCreateModSupporterData()->mod_access ? 'checked' : '' !!}>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="1" {!! $player->getOrCreateModSupporterData()->mod_access ? 'checked' : '' !!} id="mod_access" name="mod_access">
+                                <label class="form-check-label" for="mod_access">
+                                    Mod Access
+                                </label>
                             </div>
 
                             <div class="form-group">
-                                <label for="cloak_file">Supporter Cloak Image:</label>
-                                <input type="file" id="cloak_file" name="cloak_file">
+                                <label for="cloak_file">Supporter Cloak Image</label>
+                                <input type="file" class="form-control-file" id="cloak_file">
                                 @if($player->getOrCreateModSupporterData()->cloak_path)
                                     <br>
                                     <img
