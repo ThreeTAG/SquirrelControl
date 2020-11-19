@@ -17,7 +17,7 @@
                             <div class="form-group">
                                 <div class="floating-label textfield-box">
                                     <label for="name">Name</label>
-                                    <input class="form-control" id="name"
+                                    <input class="form-control" id="name" name="name"
                                            placeholder="Name" type="text" value="{!! $role->name !!}">
                                 </div>
                             </div>

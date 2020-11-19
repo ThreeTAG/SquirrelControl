@@ -18,7 +18,7 @@
                                 <div class="col-md-5 mb-3 form-group">
                                     <div class="floating-label textfield-box">
                                         <label for="name">Add Accessoire</label>
-                                        <input class="form-control" id="name"
+                                        <input class="form-control" id="name" name="name"
                                                placeholder="ID" type="text">
                                     </div>
                                 </div>

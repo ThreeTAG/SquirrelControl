@@ -16,7 +16,7 @@
                             <div class="form-group">
                                 <div class="floating-label textfield-box">
                                     <label for="name">Name</label>
-                                    <input class="form-control" id="name"
+                                    <input class="form-control" id="name" name="name"
                                            placeholder="Name" type="text" value="{!! $user->name !!}">
                                 </div>
                             </div>
@@ -24,7 +24,7 @@
                             <div class="form-group">
                                 <div class="floating-label textfield-box">
                                     <label for="email">E-Mail</label>
-                                    <input class="form-control" id="email"
+                                    <input class="form-control" id="email" name="email"
                                            placeholder="E-Mail" type="email" value="{!! $user->email !!}">
                                 </div>
                             </div>
