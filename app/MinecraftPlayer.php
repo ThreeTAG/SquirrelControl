@@ -5,7 +5,6 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Collection;
 
@@ -84,12 +83,12 @@ class MinecraftPlayer extends Model
 
     public function getOrCreateModSupporterData(): ModSupporterData
     {
-        return $this->modSupporterData ?? $this->modSupporterData()->create();
+        return $this->modSupporterData()->exists() ? $this->modSupporterData : $this->modSupporterData()->create();
     }
 
     public function getOrCreateCraftfallData(): CraftfallData
     {
-        return $this->craftfallData ?? $this->craftfallData()->create();
+        return $this->craftfallData()->exists() ? $this->craftfallData : $this->craftfallData()->create();
     }
 
 }

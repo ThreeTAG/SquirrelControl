@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Permission\Traits\HasRoles;
 
 /**
  * Class CraftfallData
@@ -14,6 +15,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class CraftfallData extends Model
 {
+    use HasRoles;
+
     protected $fillable = [
         'player_id',
         'money',
