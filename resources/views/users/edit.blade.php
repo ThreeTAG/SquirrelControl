@@ -34,7 +34,7 @@
                             <label for="roles">Roles:</label>
                             <multi-select
                                 id="roles"
-                                name="roles"
+                                name="roles[]"
                                 :options="{{$allRoles}}"
                                 :value="{{$userRoles}}"
                             >
@@ -43,7 +43,7 @@
                             <label for="permissions">Permissions:</label>
                             <multi-select
                                 id="permissions"
-                                name="permissions"
+                                name="permissions[]"
                                 :options="{{$allPermissions}}"
                                 :value="{{$userPermissions}}"
                             >

@@ -25,7 +25,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::all();
+        $roles = Role::where('guard_name', 'web')->get();
 
         return view('roles.index', compact('roles'));
     }

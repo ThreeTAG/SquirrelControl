@@ -46,4 +46,18 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/accessoires/sets/add', 'AccessoireSetController@store')->name('accessoires.sets.store');
     Route::get('/accessoires/sets/{set}', 'AccessoireSetController@edit')->name('accessoires.sets.edit');
     Route::post('/accessoires/sets/{set}', 'AccessoireSetController@update')->name('accessoires.sets.update');
+
+    Route::prefix('craftfall')->name('craftfall.')->group(function () {
+        Route::get('/', 'HomeController@craftfall')->name('home');
+
+        Route::get('/roles', 'Craftfall\CFRoleController@index')->name('roles.index');
+        Route::get('/role/{role}', 'Craftfall\CFRoleController@edit')->name('roles.edit');
+        Route::post('/role/add', 'Craftfall\CFRoleController@store')->name('roles.store');
+        Route::post('/role/{role}', 'Craftfall\CFRoleController@update')->name('roles.update');
+
+        Route::get('/players', 'Craftfall\CFPlayerController@index')->name('players.index');
+        Route::get('/players/search/{search?}', 'Craftfall\CFPlayerController@search')->name('players.search');
+        Route::get('/players/{player}', 'Craftfall\CFPlayerController@edit')->name('players.edit');
+        Route::post('/players/{player}', 'Craftfall\CFPlayerController@update')->name('players.update');
+    });
 });

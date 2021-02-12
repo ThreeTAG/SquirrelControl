@@ -22,7 +22,6 @@ class UserController extends Controller
         $this->middleware('permission:users.manage');
     }
 
-
     /**
      * Display a listing of the users
      *
@@ -48,7 +47,7 @@ class UserController extends Controller
             ];
         };
 
-        $allRoles = Role::all()->map($mapForTreeSelect);
+        $allRoles = Role::where('guard_name', 'web')->get()->map($mapForTreeSelect);
         $allPermissions = Permission::where('guard_name', 'web')->get()->map($mapForTreeSelect);
 
         $userRoles = $user->roles->map($mapForTreeSelect)->pluck('id');
