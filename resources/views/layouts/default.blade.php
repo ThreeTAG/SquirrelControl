@@ -1,5 +1,17 @@
 @extends('layouts.app')
 
+@section('navbar-brand')
+    <a class="navbar-brand" href="{{ url('/') }}">
+        {{ config('app.name', 'SquirrelControl') }}
+    </a>
+@endsection
+
+@section('navbar-switch-button')
+    <li class="nav-item">
+        <a class="nav-link" href="/craftfall"><i class="fa fa-exchange"></i> Craftfall</a>
+    </li>
+@endsection
+
 @section('navbar')
     <!-- Left Side Of Navbar -->
     <ul class="navbar-nav mr-auto">
