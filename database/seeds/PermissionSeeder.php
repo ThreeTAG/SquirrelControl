@@ -1,7 +1,7 @@
 <?php
 
+use App\Permission;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Permission;
 
 class PermissionSeeder extends Seeder
 {
@@ -12,10 +12,12 @@ class PermissionSeeder extends Seeder
      */
     public function run()
     {
-        Permission::create(['name' => 'users.manage', 'guard_name' => 'web']);
-        Permission::create(['name' => 'minecraft_players.manage', 'guard_name' => 'web']);
-        Permission::create(['name' => 'roles.manage', 'guard_name' => 'web']);
-        Permission::create(['name' => 'patreon.manage', 'guard_name' => 'web']);
-        Permission::create(['name' => 'accessoires.manage', 'guard_name' => 'web']);
+        $refl = new ReflectionClass(Permission::class);
+
+        foreach ($refl->getConstants() as $name => $value) {
+            if (substr($name, 0, 4) === 'WEB_') {
+                Permission::findOrCreate($value);
+            }
+        }
     }
 }

@@ -1,18 +1,18 @@
 <?php
 
+use App\Permission;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class CreateCraftfallPagesPermissions extends Migration
 {
     protected $permissions = [
-        'craftfall.players.view' => 'Craftfall Moderator|Craftfall Admin',
-        'craftfall.players.manage.authorization' => 'Craftfall Admin',
-        'craftfall.roles.manage' => 'Craftfall Admin',
-        'craftfall.warps.manage' => 'Craftfall Moderator|Craftfall Admin',
+        Permission::WEB_CRAFTFALL_PLAYERS_VIEW => 'Craftfall Moderator|Craftfall Admin',
+        Permission::WEB_CRAFTFALL_PLAYERS_MANAGE_AUTHORIZATION => 'Craftfall Admin',
+        Permission::WEB_CRAFTFALL_ROLES_MANAGE => 'Craftfall Admin',
+        Permission::WEB_CRAFTFALL_WARPS_MANAGE => 'Craftfall Moderator|Craftfall Admin',
     ];
 
     /**
