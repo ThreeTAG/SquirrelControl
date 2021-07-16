@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Permission;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
@@ -17,7 +17,7 @@ class RoleController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('permission:roles.manage');
+        $this->permissionMiddleware(Permission::WEB_ROLES_MANAGE);
     }
 
     /**

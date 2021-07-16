@@ -7,6 +7,7 @@ use App\AccessoireSet;
 use App\Http\Helpers\MinecraftPlayerHelper;
 use App\Http\Helpers\MojangAPI;
 use App\MinecraftPlayer;
+use App\Permission;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
@@ -21,7 +22,7 @@ class MinecraftPlayerController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('permission:minecraft_players.manage');
+        $this->permissionMiddleware(Permission::WEB_MINECRAFT_PLAYERS_MANAGE);
     }
 
 

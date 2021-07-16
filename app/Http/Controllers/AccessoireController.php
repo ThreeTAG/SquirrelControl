@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Accessoire;
+use App\Permission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -13,7 +14,7 @@ class AccessoireController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('permission:accessoires.manage');
+        $this->permissionMiddleware(Permission::WEB_ACCESSOIRES_MANAGE);
     }
 
     public function index()

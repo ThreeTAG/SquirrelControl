@@ -1,12 +1,15 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\Permission;
 use Illuminate\Database\Seeder;
+use ReflectionClass;
 
 class PermissionSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Run the database seeders.
      *
      * @return void
      */

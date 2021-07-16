@@ -8,6 +8,7 @@ use App\Http\Helpers\MojangAPI;
 use App\MinecraftPlayer;
 use App\Patron;
 use App\PatronTier;
+use App\Permission;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
@@ -22,7 +23,7 @@ class PatreonController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('permission:patreon.manage');
+        $this->permissionMiddleware(Permission::WEB_PATREON_MANAGE);
     }
 
     public function index()

@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Permission;
 use App\User;
-use App\Http\Requests\UserRequest;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
 use Illuminate\View\View;
-use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
@@ -19,7 +17,7 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('permission:users.manage');
+        $this->permissionMiddleware(Permission::WEB_USERS_MANAGE);
     }
 
     /**

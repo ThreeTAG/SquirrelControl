@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Craftfall;
 
 use App\CraftfallData;
 use App\Http\Controllers\Controller;
-use App\Http\Helpers\MinecraftPlayerHelper;
+use App\Permission;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
@@ -12,7 +12,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
-use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class CFRoleController extends Controller
@@ -23,6 +22,7 @@ class CFRoleController extends Controller
     public function __construct()
     {
         $this->middleware('permission:craftfall.roles.manage');
+        $this->permissionMiddleware(Permission::WEB_CRAFTFALL_ROLES_MANAGE);
     }
 
     /**

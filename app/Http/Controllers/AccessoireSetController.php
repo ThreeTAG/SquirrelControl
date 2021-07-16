@@ -6,6 +6,7 @@ use App\Accessoire;
 use App\AccessoireSet;
 use App\Http\Helpers\MinecraftPlayerHelper;
 use App\MinecraftPlayer;
+use App\Permission;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
@@ -20,7 +21,7 @@ class AccessoireSetController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('permission:accessoires.manage');
+        $this->permissionMiddleware(Permission::WEB_ACCESSOIRES_MANAGE);
     }
 
     /**
@@ -28,7 +29,7 @@ class AccessoireSetController extends Controller
      *
      * @return Application|Factory|View
      */
-    public function index()
+    public function index(): Factory|View|Application
     {
         $sets = AccessoireSet::query()->paginate(20);
 
@@ -41,7 +42,7 @@ class AccessoireSetController extends Controller
      * @param Request $request
      * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         AccessoireSet::create(['name' => $request->get('name')]);
         Session::flash('success', 'Accessoire Set added!');
@@ -55,7 +56,7 @@ class AccessoireSetController extends Controller
      * @param AccessoireSet $set
      * @return Application|Factory|View
      */
-    public function edit(AccessoireSet $set)
+    public function edit(AccessoireSet $set): Factory|View|Application
     {
         // map function for the vue-treeselect
         $mapForTreeSelect = function ($model) {
@@ -78,7 +79,7 @@ class AccessoireSetController extends Controller
      * @param AccessoireSet $set
      * @return RedirectResponse
      */
-    public function update(Request $request, AccessoireSet $set)
+    public function update(Request $request, AccessoireSet $set): RedirectResponse
     {
         $set->accessoires()->sync($request->get('accessoires'));
         $set->update(['name' => $request->get('name')]);

@@ -25,4 +25,7 @@ class Permission extends BasePermission
     const WEB_CRAFTFALL_PLAYERS_MANAGE_AUTHORIZATION = 'craftfall.players.manage.authorization';
     const WEB_CRAFTFALL_ROLES_MANAGE = 'craftfall.roles.manage';
     const WEB_CRAFTFALL_WARPS_MANAGE = 'craftfall.warps.manage';
+    const WEB_CRAFTFALL_BANS_VIEW = 'craftfall.bans.view';
+    const WEB_CRAFTFALL_BANS_CREATE = 'craftfall.bans.create';
+    const WEB_CRAFTFALL_BANS_REVOKE = 'craftfall.bans.revoke';
 }

@@ -4,14 +4,13 @@ namespace App\Http\Controllers\Craftfall;
 
 use App\Http\Controllers\Controller;
 use App\MinecraftPlayer;
+use App\Permission;
 use App\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
-use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class CFPlayerController extends Controller
@@ -19,7 +18,8 @@ class CFPlayerController extends Controller
 
     public function __construct()
     {
-        $this->middleware('permission:craftfall.players.view');
+        $this->permissionMiddleware(Permission::WEB_CRAFTFALL_PLAYERS_VIEW);
+        $this->permissionMiddleware(Permission::WEB_CRAFTFALL_PLAYERS_MANAGE_AUTHORIZATION)->only(['edit', 'update']);
     }
 
     public function index()
@@ -55,8 +55,6 @@ class CFPlayerController extends Controller
      */
     public function edit(MinecraftPlayer $player)
     {
-        abort_if(!auth()->user()->hasPermissionTo('craftfall.players.manage.authorization'), 403);
-
         // map function for the vue-treeselect
         $mapForTreeSelect = function ($model) {
             return [
@@ -85,8 +83,6 @@ class CFPlayerController extends Controller
      */
     public function update(Request $request, MinecraftPlayer $player)
     {
-        abort_if(!auth()->user()->hasPermissionTo('craftfall.players.manage.authorization'), 403);
-
         $craftfallData = $player->getOrCreateCraftfallData();
 
         $craftfallData->roles()->sync($request->get('roles'));

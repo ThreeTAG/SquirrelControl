@@ -23,7 +23,7 @@ class HomeController extends Controller
      *
      * @return Renderable
      */
-    public function index()
+    public function index(): Renderable
     {
         return view('home');
     }
@@ -33,7 +33,7 @@ class HomeController extends Controller
      *
      * @return Renderable
      */
-    public function craftfall()
+    public function craftfall(): Renderable
     {
         $ping = MojangAPI::ping('94.130.23.197:25564');
         return view('craftfall.home', compact('ping'));

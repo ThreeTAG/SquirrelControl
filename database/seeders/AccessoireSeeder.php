@@ -1,12 +1,14 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\Accessoire;
 use Illuminate\Database\Seeder;
 
 class AccessoireSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Run the database seeders.
      *
      * @return void
      */
