@@ -15,6 +15,7 @@
         "laravel/framework": "^8.40",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.3",
+        "laravelista/comments": "^4.5",
         "soatok/patreon": "^0.6.0",
         "spatie/laravel-permission": "^4.2"
     },

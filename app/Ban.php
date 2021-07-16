@@ -4,6 +4,7 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Laravelista\Comments\Commentable;
 
 /**
  * Class Ban
@@ -21,6 +22,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Ban extends Model
 {
+    use Commentable;
+
     public $table = 'cf_bans';
 
     protected $fillable = [

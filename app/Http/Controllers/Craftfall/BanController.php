@@ -9,7 +9,10 @@ use App\Permission;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Database\Query\Builder;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use Illuminate\View\View;
+use Laravelista\Comments\Comment;
 
 class BanController extends Controller
 {
@@ -48,5 +51,16 @@ class BanController extends Controller
     public function view(Ban $ban)
     {
         return view('craftfall.bans.view', compact('ban'));
+    }
+
+    public function postComment(Ban $ban)
+    {
+        $comment = new Comment();
+        $comment->commenter()->associate(auth()->user());
+        $comment->commentable()->associate($ban);
+        $comment->comment = request('comment');
+        $comment->save();
+
+        return view('craftfall.bans.comment', compact('comment'));
     }
 }
