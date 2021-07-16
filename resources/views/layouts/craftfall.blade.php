@@ -27,12 +27,15 @@
                         Administration
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        @if(auth()->user()->checkPermissionTo('craftfall.players.view') || auth()->user()->checkPermissionTo('craftfall.players.manage.authorization'))
+                        @can([\App\Permission::WEB_CRAFTFALL_PLAYERS_VIEW, \App\Permission::WEB_CRAFTFALL_PLAYERS_MANAGE_AUTHORIZATION])
                             <a class="dropdown-item" href="{!! route('craftfall.players.index') !!}">Players</a>
-                        @endif
-                        @if(auth()->user()->checkPermissionTo('craftfall.roles.manage'))
+                        @endcan
+                        @can(\App\Permission::WEB_CRAFTFALL_ROLES_MANAGE)
                             <a class="dropdown-item" href="{!! route('craftfall.roles.index') !!}">Roles</a>
-                        @endif
+                        @endcan
+                            @can(\App\Permission::WEB_CRAFTFALL_BANS_VIEW)
+                            <a class="dropdown-item" href="{!! route('craftfall.bans.index') !!}">Bans</a>
+                            @endcan
                     </div>
                 </li>
             @endif

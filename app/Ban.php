@@ -11,9 +11,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $player_id
  * @property-read MinecraftPlayer $player
  * @property int $created_by_id
- * @property-read User $created_by
+ * @property-read User $createdBy
  * @property int|null $revoked_by_id
- * @property-read User|null $revoked_by
+ * @property-read User|null $revokedBy
  * @property string $reason
  * @property Carbon|null $until
  * @property Carbon $created_at
@@ -21,7 +21,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Ban extends Model
 {
-    public $table = 'cf_ban';
+    public $table = 'cf_bans';
 
     protected $fillable = [
         'player_id',

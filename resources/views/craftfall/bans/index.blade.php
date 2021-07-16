@@ -5,27 +5,25 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card bg-light">
-                    <h3 class="card-header">Players</h3>
+                    <h3 class="card-header">Bans</h3>
 
                     <div class="card-body">
 
                         @include('partials.error-success-info')
 
-                        <input type="text" class="form-control" id="player-search" placeholder="Search...">
+                        <input type="text" class="form-control" id="ban-search" placeholder="Search...">
 
                         <table class="table table-striped" id="userTable">
                             <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>UUID</th>
-                                <th>Last Join</th>
-                                @can(\App\Permission::WEB_CRAFTFALL_PLAYERS_MANAGE_AUTHORIZATION)
-                                    <th></th>
-                                @endcan
+                                <th>Banned by</th>
+                                <th>Expires at</th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody id="table-content">
-                            @include('craftfall.players.table_rows', compact('players'))
+                            @include('craftfall.bans.table_rows', compact('bans'))
                             </tbody>
                         </table>
                     </div>
@@ -38,10 +36,10 @@
 @section('script')
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#player-search').on('input propertychange', function () {
+            $('#ban-search').on('input propertychange', function () {
                 $.ajax({
                     method: "GET",
-                    url: "/craftfall/players/search/" + $(this).val(),
+                    url: "/craftfall/bans/search/" + $(this).val(),
                 }).done(function (msg) {
                     $('#table-content').html(msg);
                 });

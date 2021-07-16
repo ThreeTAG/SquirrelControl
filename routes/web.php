@@ -59,5 +59,9 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/players/search/{search?}', 'Craftfall\CFPlayerController@search')->name('players.search');
         Route::get('/players/{player}', 'Craftfall\CFPlayerController@edit')->name('players.edit');
         Route::post('/players/{player}', 'Craftfall\CFPlayerController@update')->name('players.update');
+
+        Route::get('/bans', 'Craftfall\BanController@index')->name('bans.index');
+        Route::get('/bans/search/{search?}', 'Craftfall\BanController@search')->name('bans.search');
+        Route::get('/ban/{ban}', 'Craftfall\BanController@view')->name('bans.view');
     });
 });
