@@ -26,14 +26,16 @@
                         <label>Reason:</label><br>
                         {!! $ban->reason !!}
 
-                        @can(\App\Permission::WEB_CRAFTFALL_BANS_REVOKE)
-                            <hr>
+                        @if(!$ban->revokedBy)
+                            @can(\App\Permission::WEB_CRAFTFALL_BANS_REVOKE)
+                                <hr>
 
-                            <button type="button" class="btn btn-primary pull-right" data-toggle="modal"
-                                    data-target="#revokeModal">
-                                Revoke Ban
-                            </button>
-                        @endcan
+                                <button type="button" class="btn btn-primary pull-right" data-toggle="modal"
+                                        data-target="#revokeModal">
+                                    Revoke Ban
+                                </button>
+                            @endcan
+                        @endif
                     </div>
                 </div>
 

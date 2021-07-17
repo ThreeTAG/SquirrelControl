@@ -123,6 +123,10 @@ class BanController extends Controller
 
     public function revoke(Ban $ban)
     {
+        if ($ban->revokedBy) {
+            return redirect()->route('craftfall.bans.view', compact('ban'));
+        }
+
         $now = Carbon::now();
         $ban->update([
             'revoked_by_id' => auth()->user()->id,
