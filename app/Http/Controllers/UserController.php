@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 use Spatie\Permission\Models\Role;
 
@@ -40,7 +41,7 @@ class UserController extends Controller
         // map function for the vue-treeselect
         $mapForTreeSelect = function ($model) {
             return [
-                'id'    => $model->id,
+                'id' => $model->id,
                 'label' => $model->name
             ];
         };
@@ -61,8 +62,14 @@ class UserController extends Controller
             'email' => 'required|email',
         ]);
 
-        $user->update($request->all());
+        $user->name = $request->get('name');
+        $user->email = $request->get('email');
 
+        if ($request->get('password')) {
+            $user->password = Hash::make($request->get('password'));
+        }
+
+        $user->save();
         $user->roles()->sync($request->get('roles'));
         $user->permissions()->sync($request->get('permissions'));
 

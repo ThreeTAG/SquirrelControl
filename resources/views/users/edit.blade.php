@@ -29,6 +29,14 @@
                                 </div>
                             </div>
 
+                            <div class="form-group">
+                                <div class="floating-label textfield-box">
+                                    <label for="password">Password</label>
+                                    <input class="form-control" id="password" name="password"
+                                           placeholder="Password" type="password" value="">
+                                </div>
+                            </div>
+
                             <hr>
 
                             <label for="roles">Roles:</label>
