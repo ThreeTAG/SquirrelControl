@@ -66,5 +66,6 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/ban/{ban}', 'Craftfall\BanController@view')->name('bans.view');
         Route::post('/ban/{ban}/comment', 'Craftfall\BanController@postComment')->name('bans.comment');
         Route::post('/ban/store', 'Craftfall\BanController@store')->name('bans.store');
+        Route::post('/ban/{ban}/revoke', 'Craftfall\BanController@revoke')->name('bans.revoke');
     });
 });

@@ -10,6 +10,7 @@ use App\Rules\ValidMinecraftPlayerRule;
 use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
@@ -26,6 +27,7 @@ class BanController extends Controller
         $this->middleware('auth');
         $this->permissionMiddleware(Permission::WEB_CRAFTFALL_BANS_VIEW);
         $this->permissionMiddleware(Permission::WEB_CRAFTFALL_BANS_CREATE)->only(['create', 'store']);
+        $this->permissionMiddleware(Permission::WEB_CRAFTFALL_BANS_REVOKE)->only(['revoke']);
     }
 
     protected function index()
@@ -115,6 +117,24 @@ class BanController extends Controller
         if ($rcon->connect()) {
             $rcon->sendCommand('ban kick ' . $player->name);
         }
+
+        return redirect()->route('craftfall.bans.view', compact('ban'));
+    }
+
+    public function revoke(Ban $ban)
+    {
+        $now = Carbon::now();
+        $ban->update([
+            'revoked_by_id' => auth()->user()->id,
+            'revoked_at' => $now,
+        ]);
+
+        $comment = new Comment();
+        $comment->commenter()->associate(auth()->user());
+        $comment->commentable()->associate($ban);
+        $comment->comment = request('reason');
+        $comment->setCreatedAt($now);
+        $comment->save();
 
         return redirect()->route('craftfall.bans.view', compact('ban'));
     }

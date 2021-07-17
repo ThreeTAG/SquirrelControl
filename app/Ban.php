@@ -30,6 +30,7 @@ class Ban extends Model
         'player_id',
         'created_by_id',
         'revoked_by_id',
+        'revoked_at',
         'reason',
         'until',
     ];

@@ -26,6 +26,14 @@
                         <label>Reason:</label><br>
                         {!! $ban->reason !!}
 
+                        @can(\App\Permission::WEB_CRAFTFALL_BANS_REVOKE)
+                            <hr>
+
+                            <button type="button" class="btn btn-primary pull-right" data-toggle="modal"
+                                    data-target="#revokeModal">
+                                Revoke Ban
+                            </button>
+                        @endcan
                     </div>
                 </div>
 
@@ -45,6 +53,29 @@
                         <button id="post-comment-button" class="btn btn-primary pull-right">Send</button>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="revokeModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Revoke ban</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{!! route('craftfall.bans.revoke', ['ban' => $ban->id]) !!}" method="POST">
+                    @csrf
+                    <div class="modal-body">
+                        <textarea class="form-control" name="reason" placeholder="Reason..." required></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Revoke</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
