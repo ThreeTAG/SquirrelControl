@@ -62,7 +62,9 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::get('/bans', 'Craftfall\BanController@index')->name('bans.index');
         Route::get('/bans/search/{search?}', 'Craftfall\BanController@search')->name('bans.search');
+        Route::get('/ban/create', 'Craftfall\BanController@create')->name('bans.create');
         Route::get('/ban/{ban}', 'Craftfall\BanController@view')->name('bans.view');
         Route::post('/ban/{ban}/comment', 'Craftfall\BanController@postComment')->name('bans.comment');
+        Route::post('/ban/store', 'Craftfall\BanController@store')->name('bans.store');
     });
 });

@@ -4,13 +4,14 @@ namespace App\Http\Controllers\Craftfall;
 
 use App\Ban;
 use App\Http\Controllers\Controller;
-use App\MinecraftPlayer;
+use App\Http\Helpers\MinecraftPlayerHelper;
 use App\Permission;
+use App\Rules\ValidMinecraftPlayerRule;
+use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
-use Illuminate\Database\Query\Builder;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Config;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 use Laravelista\Comments\Comment;
 
@@ -21,7 +22,9 @@ class BanController extends Controller
      */
     public function __construct()
     {
-        $this->permissionMiddleware(Permission::WEB_CRAFTFALL_BANS_VIEW)->only('index');
+        $this->middleware('auth');
+        $this->permissionMiddleware(Permission::WEB_CRAFTFALL_BANS_VIEW);
+        $this->permissionMiddleware(Permission::WEB_CRAFTFALL_BANS_CREATE)->only(['create', 'store']);
     }
 
     protected function index()
@@ -62,5 +65,44 @@ class BanController extends Controller
         $comment->save();
 
         return view('craftfall.bans.comment', compact('comment'));
+    }
+
+    public function create()
+    {
+        return view('craftfall.bans.create');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'player' => ['required', new ValidMinecraftPlayerRule()],
+            'reason' => 'required|string',
+            'expiryType' => 'required|integer',
+            'expiry_until' => [Rule::requiredIf(intval($request->get('expiryType')) === 2)],
+            'expiry_for' => [Rule::requiredIf(intval($request->get('expiryType')) === 3)],
+        ]);
+
+        try {
+            $player = MinecraftPlayerHelper::getMinecraftPlayer($request->get('player'));
+        } catch (\Exception $e) {
+            abort(404);
+        }
+
+        $expiryType = intval($request->get('expiryType'));
+        $until = null;
+        if ($expiryType === 2) {
+            $until = Carbon::parse($request->get('expiry_until'));
+        } else if ($expiryType === 3) {
+            $until = Carbon::createFromTimestamp(strtotime($request->get('expiry_for')));
+        }
+
+        $ban = Ban::create([
+            'player_id' => $player->id,
+            'created_by_id' => auth()->user()->id,
+            'reason' => $request->get('reason'),
+            'until' => $until,
+        ]);
+
+        return redirect()->route('craftfall.bans.view', compact('ban'));
     }
 }

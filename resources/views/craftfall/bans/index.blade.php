@@ -11,6 +11,10 @@
 
                         @include('partials.error-success-info')
 
+                        @can(\App\Permission::WEB_CRAFTFALL_BANS_CREATE)
+                            <a class="btn btn-primary" href="{!! route('craftfall.bans.create') !!}">New Ban</a>
+                        @endcan
+
                         <input type="text" class="form-control" id="ban-search" placeholder="Search...">
 
                         <table class="table table-striped" id="userTable">
