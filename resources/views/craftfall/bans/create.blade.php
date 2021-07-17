@@ -18,7 +18,7 @@
                                 <div class="floating-label textfield-box">
                                     <label for="player">Player</label>
                                     <input class="form-control" id="player" name="player"
-                                           placeholder="Player" type="text" value="{!! old('player') !!}" required>
+                                           placeholder="Player" type="text" value="{!! old('player', $player ? $player->name : null) !!}" required>
                                 </div>
                             </div>
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Craftfall;
 use App\CraftfallData;
 use App\Http\Controllers\Controller;
 use App\Permission;
+use App\Role;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
@@ -12,7 +13,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
-use Spatie\Permission\Models\Role;
 
 class CFRoleController extends Controller
 {
@@ -57,7 +57,7 @@ class CFRoleController extends Controller
             Role::create([
                 'name' => $name,
                 'guard_name' => 'minecraft',
-            ]);
+            ])->craftfallData()->create();
             Session::flash('success', 'Role added!');
         }
 
@@ -82,7 +82,11 @@ class CFRoleController extends Controller
 
         $rolePermissions = $role->permissions->map($mapForTreeSelect)->pluck('id');
 
-        $data = DB::table('cf_role_data')->select('*')->where('role_id', $role->id)->limit(1)->get()->first() ?? [];
+        $data = $role->craftfallData;
+
+        if (!$data) {
+            $data = $role->craftfallData()->create();
+        }
 
         return view('craftfall.roles.edit', compact('role', 'allPermissions', 'rolePermissions', 'data'));
     }
@@ -96,15 +100,16 @@ class CFRoleController extends Controller
     {
         $role->permissions()->sync($request->get('permissions'));
 
-        $exists = DB::table('cf_role_data')->select('*')->where('role_id', $role->id)->limit(1)->exists();
-        $data = DB::table('cf_role_data')->select('*')->where('role_id', $role->id)->limit(1)->get()->first();
-        $data->role_id = $role->id;
-        $data->prefix = $request->get('prefix');
+        $data = $role->craftfallData;
 
-        if ($exists) {
-            DB::table('cf_role_data')->where('role_id', $role->id)->update(json_decode(json_encode($data), true));
+        if ($data) {
+            $data->update([
+                'prefix' => json_decode(json_encode($request->get('prefix')), true),
+            ]);
         } else {
-            DB::table('cf_role_data')->insert(json_decode(json_encode($data), true));
+            $role->craftfallData()->create([
+                'prefix' => json_decode(json_encode($request->get('prefix')), true),
+            ]);
         }
 
         return redirect()->route('craftfall.roles.index');

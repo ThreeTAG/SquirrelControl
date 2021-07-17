@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 use Laravelista\Comments\Comment;
+use Thedudeguy\Rcon;
 
 class BanController extends Controller
 {
@@ -67,9 +68,15 @@ class BanController extends Controller
         return view('craftfall.bans.comment', compact('comment'));
     }
 
-    public function create()
+    public function create($name = null)
     {
-        return view('craftfall.bans.create');
+        try {
+            $player = MinecraftPlayerHelper::getMinecraftPlayer($name);
+        } catch (\Exception $e) {
+            $player = null;
+        }
+
+        return view('craftfall.bans.create', compact('player'));
     }
 
     public function store(Request $request)
@@ -102,6 +109,12 @@ class BanController extends Controller
             'reason' => $request->get('reason'),
             'until' => $until,
         ]);
+
+        $rcon = new Rcon(env('MINECRAFT_SERVER_IP'), env('MINECRAFT_SERVER_RCON_PORT'), env('MINECRAFT_SERVER_RCON_PASSWORD'), 3);
+
+        if ($rcon->connect()) {
+            $rcon->sendCommand('ban kick ' . $player->name);
+        }
 
         return redirect()->route('craftfall.bans.view', compact('ban'));
     }

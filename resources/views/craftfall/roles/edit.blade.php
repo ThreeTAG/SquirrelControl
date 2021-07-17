@@ -26,7 +26,7 @@
                                 <div class="floating-label textfield-box">
                                     <label for="prefix">Prefix</label>
                                     <input class="form-control" id="prefix" name="prefix"
-                                           placeholder="Prefix" type="text" value="{!! Arr::get($data, 'prefix') !!}}">
+                                           placeholder="Prefix" type="text" value="{!! Arr::get($data, 'prefix') !!}">
                                 </div>
                             </div>
 
