@@ -8,11 +8,7 @@
                     <div class="card-header">Dashboard</div>
 
                     <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
-                            </div>
-                        @endif
+                        @include('partials.errors')
 
                         @if($ping)
                             <h3>{!! $ping['description']['text'] !!}<br></h3><br>
@@ -41,6 +37,14 @@
                                     @endforeach
                                 @endif
                             </div>
+
+                            @if(auth()->user()->hasRole('Admin'))
+                                <form action="{!! route('craftfall.command') !!}" method="POST">
+                                    @csrf
+                                    <input type="text" class="form-control" name="command" placeholder="Command">
+                                    <button type="submit" class="btn btn-primary">Send Command</button>
+                                </form>
+                            @endif
 
                         @else
                             Server offline :/

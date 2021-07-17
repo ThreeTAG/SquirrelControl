@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Helpers\MojangAPI;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
+use Thedudeguy\Rcon;
 
 class HomeController extends Controller
 {
@@ -37,5 +38,18 @@ class HomeController extends Controller
     {
         $ping = MojangAPI::ping('94.130.23.197:25564');
         return view('craftfall.home', compact('ping'));
+    }
+
+    public function command()
+    {
+        $command = request('command');
+
+        $rcon = new Rcon(env('MINECRAFT_SERVER_IP'), env('MINECRAFT_SERVER_RCON_PORT'), env('MINECRAFT_SERVER_RCON_PASSWORD'), 3);
+
+        if ($rcon->connect()) {
+            $rcon->sendCommand($command);
+        }
+
+        return redirect()->route('craftfall.home');
     }
 }

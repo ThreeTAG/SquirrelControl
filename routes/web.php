@@ -49,6 +49,7 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::prefix('craftfall')->name('craftfall.')->group(function () {
         Route::get('/', 'HomeController@craftfall')->name('home');
+        Route::post('/command', 'HomeController@command')->name('command');
 
         Route::get('/roles', 'Craftfall\CFRoleController@index')->name('roles.index');
         Route::get('/role/{role}', 'Craftfall\CFRoleController@edit')->name('roles.edit');
