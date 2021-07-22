@@ -29,7 +29,7 @@ class AccessoireSetController extends Controller
      *
      * @return Application|Factory|View
      */
-    public function index(): Factory|View|Application
+    public function index()
     {
         $sets = AccessoireSet::query()->paginate(20);
 
@@ -56,7 +56,7 @@ class AccessoireSetController extends Controller
      * @param AccessoireSet $set
      * @return Application|Factory|View
      */
-    public function edit(AccessoireSet $set): Factory|View|Application
+    public function edit(AccessoireSet $set)
     {
         // map function for the vue-treeselect
         $mapForTreeSelect = function ($model) {
