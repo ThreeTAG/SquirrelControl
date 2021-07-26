@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Craftfall;
 
 use App\Http\Controllers\Controller;
 use App\MinecraftPlayer;
+use App\MoneyHistory;
 use App\Permission;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
@@ -71,7 +73,7 @@ class CFPlayerController extends Controller
         $userRoles = $craftfallData->roles->map($mapForTreeSelect)->pluck('id');
         $userPermissions = $craftfallData->permissions->map($mapForTreeSelect)->pluck('id');
 
-        return view('craftfall.players.edit', compact('player', 'allRoles', 'allPermissions', 'userRoles', 'userPermissions'));
+        return view('craftfall.players.edit', compact('player', 'allRoles', 'allPermissions', 'userRoles', 'userPermissions', 'craftfallData'));
     }
 
     /**
@@ -87,6 +89,19 @@ class CFPlayerController extends Controller
 
         $craftfallData->roles()->sync($request->get('roles'));
         $craftfallData->permissions()->sync($request->get('permissions'));
+
+        $money = $request->get('money');
+
+        if($money !== $craftfallData->money) {
+            $craftfallData->moneyHistories()->create([
+                'new_amount' => $money,
+                'difference' => $money - $craftfallData->money,
+                'type' => MoneyHistory::TYPE_CHANGED_BY_STAFF,
+                'description' => 'Changed by ' . auth()->user()->name,
+            ]);
+            $craftfallData->money = $money;
+            $craftfallData->save();
+        }
 
         return redirect()->route('craftfall.players.index');
     }

@@ -15,6 +15,12 @@
                               method="POST" enctype="multipart/form-data">
                             @csrf
 
+                            <label for="money">Money:</label>
+                            <input type="number" name="money" id="money" class="form-control"
+                                   value="{!! $craftfallData->money !!}">
+
+                            <hr>
+
                             <label for="roles">Roles:</label>
                             <multi-select
                                 id="roles"
