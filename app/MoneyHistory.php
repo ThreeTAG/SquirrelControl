@@ -22,13 +22,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class MoneyHistory extends Model
 {
-    const TYPE_SENT_TO = 0;
-    const TYPE_RECEIVED_FROM = 1;
-    const TYPE_CHANGED_BY_STAFF = 2;
-    const TYPE_QUEST_REWARD = 3;
-    const TYPE_SOLD_ITEMS = 4;
-    const TYPE_TELEPORT_COST = 5;
-    const TYPE_CLAIM_COST = 6;
+    const TYPE_UNKNOWN = 0;
+    const TYPE_SENT_TO = 1;
+    const TYPE_RECEIVED_FROM = 2;
+    const TYPE_CHANGED_BY_STAFF = 3;
+    const TYPE_QUEST_REWARD = 4;
+    const TYPE_SOLD_ITEMS = 5;
+    const TYPE_TELEPORT_COST = 6;
+    const TYPE_CLAIM_COST = 7;
 
     public $table = 'cf_money_history';
 

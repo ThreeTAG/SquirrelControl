@@ -1,5 +1,6 @@
 <?php
 
+use App\MoneyHistory;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,8 +19,8 @@ class CreateCfMoneyHistoryTable extends Migration
             $table->unsignedBigInteger('cf_data_id');
             $table->integer('difference');
             $table->integer('new_amount');
-            $table->integer('type');
-            $table->string('description');
+            $table->integer('type')->default(MoneyHistory::TYPE_UNKNOWN);
+            $table->string('description')->nullable();
             $table->timestamps();
 
             $table->foreign('cf_data_id')->references('id')->on('craftfall_data');
