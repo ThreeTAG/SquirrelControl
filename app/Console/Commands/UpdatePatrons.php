@@ -46,7 +46,7 @@ class UpdatePatrons extends Command
         Patron::query()->update([
             'tier_id' => null,
         ]);
-dd(phpinfo(INFO_GENERAL));
+
         // fetch patron data
         $apiClient = new API(config('patreon.access_token'));
 
