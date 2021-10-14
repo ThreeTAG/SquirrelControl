@@ -48,7 +48,7 @@ class UpdatePatrons extends Command
         ]);
 
         // fetch patron data
-        $apiClient = new API(env('PATREON_ACCESS_TOKEN'));
+        $apiClient = new API(config('patreon.access_token'));
 
         foreach ($apiClient->fetch_campaigns()["data"] as $campaign) {
 
