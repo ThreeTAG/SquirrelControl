@@ -16,7 +16,7 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.3",
         "laravelista/comments": "^4.5",
-        "soatok/patreon": "^0.6.0",
+        "soatok/patreon": "dev-master",
         "spatie/laravel-permission": "^4.2",
         "thedudeguy/rcon": "^1.0"
     },
