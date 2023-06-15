@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    Hello there!
+                    Hello there!<br>
 
                     General Kenobi!
                 </div>
