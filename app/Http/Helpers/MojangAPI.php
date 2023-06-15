@@ -18,22 +18,12 @@ class MojangAPI
     /**
      * Get Mojang status
      *
+     * @deprecated Mojang removed the API endpoint
+     *
      * @return array|bool  Array with status, FALSE on failure
      */
     public static function getStatus()
     {
-        $json = static::fetchJson('https://status.mojang.com/check');
-        if (is_array($json)) {
-            $status = array();
-            foreach ($json as $array) {
-                if (!empty($array)) {
-                    $key = key($array);
-                    $value = current($array);
-                    $status[$key] = $value;
-                }
-            }
-            return $status;
-        }
         return false;
     }
 
@@ -61,11 +51,13 @@ class MojangAPI
      */
     public static function getUsername($uuid)
     {
-        $history = static::getNameHistory($uuid);
-        if (is_array($history)) {
-            $last = array_pop($history);
-            if (is_array($last) and array_key_exists('name', $last)) {
-                return $last['name'];
+        if (static::isValidUuid($uuid)) {
+            $profile = static::fetchJson(
+                'https://api.mojang.com/user/profile/'
+                . static::minifyUuid($uuid)
+            );
+            if (is_array($profile) and array_key_exists('name', $profile)) {
+                return $profile['name'];
             }
         }
         return false;
@@ -93,14 +85,13 @@ class MojangAPI
     /**
      * Get name history from UUID
      *
+     * @deprecated Mojang removed the API endpoint
+     *
      * @param  string      $uuid
      * @return array|bool  Array with his username's history, FALSE on failure
      */
     public static function getNameHistory($uuid)
     {
-        if (static::isValidUuid($uuid)) {
-            return static::fetchJson('https://api.mojang.com/user/profiles/' . static::minifyUuid($uuid) . '/names');
-        }
         return false;
     }
 
@@ -177,7 +168,7 @@ class MojangAPI
         if (is_string($uuid)) {
             $sub = array();
             for ($i = 0; $i < 4; $i++) {
-                $sub[$i] = intval('0x' . substr($uuid, $i * 8, 8) . 0, 16);
+                $sub[$i] = intval($uuid[($i + 1) * 8 - 1], 16);
             }
             return (bool) ((($sub[0] ^ $sub[1]) ^ ($sub[2] ^ $sub[3])) % 2);
         }
