@@ -26,6 +26,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('update:patrons')->dailyAt('05:00');
+        $schedule->command('check:mod-updates')->everyMinute();
     }
 
     /**
