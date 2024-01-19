@@ -16,3 +16,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/player/{uuid}', 'MinecraftPlayerController@getData');
 Route::get('/legacy/data', 'MinecraftPlayerController@getLegacyData');
+Route::post('/mod-update-post', 'ModUpdatePostController@store');

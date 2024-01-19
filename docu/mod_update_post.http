@@ -1,0 +1,9 @@
+### Send POST request to create address
+POST {{host}}/api/mod-update-post HTTP/1.1
+Content-Type: application/json
+
+{
+  "mod": "palladium",
+  "version": "4.0.0",
+  "token": "{{token}}"
+}

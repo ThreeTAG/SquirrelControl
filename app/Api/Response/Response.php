@@ -9,29 +9,29 @@ class Response implements Jsonable
     /**
      * @var string
      */
-    protected $_message = '';
+    protected string $_message = '';
     /**
      * @var int
      */
-    protected $_error = 0;
+    protected int $_error = 0;
     /**
      * @var array
      */
-    protected $_data = [];
+    protected array $_data = [];
 
     /**
      * @return string
      */
-    public function getMessage()
+    public function getMessage(): string
     {
         return $this->_message;
     }
 
     /**
-     * @param $_message
+     * @param string $_message
      * @return $this
      */
-    public function setMessage($_message)
+    public function setMessage(string $_message): Response
     {
         $this->_message = $_message;
 
@@ -41,16 +41,16 @@ class Response implements Jsonable
     /**
      * @return int
      */
-    public function getError()
+    public function getError(): int
     {
         return $this->_error;
     }
 
     /**
-     * @param $_error
+     * @param int $_error
      * @return $this
      */
-    public function setError($_error)
+    public function setError(int $_error): Response
     {
         $this->_error = $_error;
 
@@ -60,24 +60,26 @@ class Response implements Jsonable
     /**
      * @return array
      */
-    public function getData()
+    public function getData(): array
     {
         return $this->_data;
     }
 
     /**
      * @param array $_data
+     * @return $this
      */
-    public function setData($_data)
+    public function setData(array $_data): Response
     {
         $this->_data = $_data;
+        return $this;
     }
 
     /**
      * @param $data
      * @return $this
      */
-    public function addData($data)
+    public function addData($data): Response
     {
         $this->_data = array_merge($this->_data, (array)$data);
 
@@ -88,7 +90,7 @@ class Response implements Jsonable
      * @param int $options
      * @return string
      */
-    public function toJson($options = 0)
+    public function toJson($options = 0): string
     {
         return json_encode([
             'error'   => $this->_error,
