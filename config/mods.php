@@ -23,6 +23,11 @@ return [
             'modrinth_id' => '123',
             'color' => '#ff0000',
         ],
+        'pantheonsent' => [
+            'curseforge_id' => 968457,
+            'modrinth_id' => 'SIKMQqt0',
+            'color' => '#f9dd55',
+        ],
     ]
 
 ];
