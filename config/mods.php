@@ -2,6 +2,8 @@
 
 return [
 
+    'curseforge_api_token' => env('CURSEFORGE_API_TOKEN'),
+
     'bot_token' => env('MOD_UPDATE_BOT_TOKEN'),
 
     'api_token' => env('MOD_UPDATE_API_TOKEN'),

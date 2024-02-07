@@ -70,7 +70,7 @@ class CheckModUpdates extends Command
             })
             ->get();
 
-        $curseForge = new CurseForgeAPIClient('$2a$10$SGMStIiA9s81ArkCSj/rh.lrxIFV3X0qoa426gbzXqp/QxvNOkEna');
+        $curseForge = new CurseForgeAPIClient(config('mods.curseforge_api_token'));;
         $modrinth = new ModrinthAPIClient();
 
         /** @var ModUpdatePost $entry */
