@@ -1,0 +1,11 @@
+{
+    "schemaVersion": 1,
+    "authors": [],
+    "environment": "*",
+    "name": "%name%",
+    "id": "%pack_id%",
+    "version": "%version%",
+    "description": "%description%",
+    "icon": "logo.png",
+    "license": "All rights reserved"
+}

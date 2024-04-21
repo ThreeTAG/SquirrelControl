@@ -6,7 +6,7 @@
 
 require('./bootstrap');
 
-window.Vue = require('vue');
+window.Vue = require('vue').default;
 
 window.$ = require('jquery');
 
@@ -21,7 +21,16 @@ window.$ = require('jquery');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
+// Components
 Vue.component('multi-select', require('./components/MultiSelectComponent.vue').default);
+Vue.component('heading', require('./components/Heading.vue').default);
+Vue.component('sub-heading', require('./components/SubHeading.vue').default);
+Vue.component('text-input', require('./components/TextInput.vue').default);
+Vue.component('xbutton', require('./components/Button.vue').default);
+Vue.component('select-input', require('./components/SelectInput.vue').default);
+
+// Pages
+Vue.component('addon-pack-template-generator', require('./pages/AddonPackTemplateGenerator.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

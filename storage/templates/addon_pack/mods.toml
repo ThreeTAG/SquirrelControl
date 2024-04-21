@@ -1,0 +1,21 @@
+modLoader = 'lowcodefml'
+showAsResourcePack = false
+loaderVersion="[47,)"
+license="All rights reserved"
+
+[[mods]]
+modId="%pack_id%"
+displayName="%name%"
+version="%version%"
+logoFile = "logo.png"
+logoBlur = false
+description='''
+%description%
+'''
+
+[[dependencies.%pack_id%]]
+modId = "palladium"
+mandatory = true
+versionRange = ""
+ordering = "NONE"
+side = "BOTH"

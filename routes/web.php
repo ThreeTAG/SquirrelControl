@@ -69,4 +69,8 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('/ban/store', 'Craftfall\BanController@store')->name('bans.store');
         Route::post('/ban/{ban}/revoke', 'Craftfall\BanController@revoke')->name('bans.revoke');
     });
+
+    // External Stuff
+    Route::get('/template-generator', 'External\TemplateGeneratorController@addonPack')->name('external.template_generator');
+    Route::get('/template-generator/download', 'External\TemplateGeneratorController@generateAddonPack')->name('external.template_generator.download');
 });

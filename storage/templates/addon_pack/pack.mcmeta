@@ -1,0 +1,16 @@
+{
+  "pack": {
+    "id": "%pack_id%",
+    "description": "%description%",
+    "pack_format": %pack_format%,
+    "version": "%version%"
+  },
+  "dependencies": {
+    "common": {
+    },
+    "fabric": {
+    },
+    "forge": {
+    }
+  }
+}
