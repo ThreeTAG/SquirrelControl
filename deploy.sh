@@ -1,6 +1,3 @@
-# Change to the project directory
-cd /home/forge/domain.com
-
 # Turn on maintenance mode
 php artisan down || true
 
