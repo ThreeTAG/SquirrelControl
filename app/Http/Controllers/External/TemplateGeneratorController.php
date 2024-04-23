@@ -32,8 +32,12 @@ class TemplateGeneratorController extends Controller
 
         $fileName .= '/pack_cache.zip';
 
+        if (file_exists($fileName)) {
+            unlink($fileName);
+        }
+
         $zip = new ZipArchive();
-        if ($zip->open($fileName, ZipArchive::OVERWRITE) !== TRUE) {
+        if ($zip->open($fileName, ZipArchive::CREATE) !== TRUE) {
             exit("cannot open $fileName\n");
         }
 
@@ -85,7 +89,7 @@ class TemplateGeneratorController extends Controller
         }
 
         $logo = $request->input('logo');
-        if($logo) {
+        if ($logo) {
             $split = explode(";base64,", $logo);
             $zip->addFromString('logo.png', base64_decode($split[1]));
         }
