@@ -77,8 +77,18 @@ class TemplateGeneratorController extends Controller
         $zip->addEmptyDir("assets/$packId/palladium/trails");
 
         $zip->addFromString('pack.mcmeta', $this->loadAndReplaceTemplate('pack.mcmeta', $name, $description, $version, $packId));
-        $zip->addFromString('fabric.mod.json', $this->loadAndReplaceTemplate('fabric.mod.json', $name, $description, $version, $packId));
-        $zip->addFromString('META-INF/mods.toml', $this->loadAndReplaceTemplate('mods.toml', $name, $description, $version, $packId));
+        if ($request->input('fabric_support', true)) {
+            $zip->addFromString('fabric.mod.json', $this->loadAndReplaceTemplate('fabric.mod.json', $name, $description, $version, $packId));
+        }
+        if ($request->input('forge_support', true)) {
+            $zip->addFromString('META-INF/mods.toml', $this->loadAndReplaceTemplate('mods.toml', $name, $description, $version, $packId));
+        }
+
+        $logo = $request->input('logo');
+        if($logo) {
+            $split = explode(";base64,", $logo);
+            $zip->addFromString('logo.png', base64_decode($split[1]));
+        }
 
         $zip->close();
 

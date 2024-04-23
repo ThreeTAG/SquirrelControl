@@ -28,6 +28,8 @@ Vue.component('sub-heading', require('./components/SubHeading.vue').default);
 Vue.component('text-input', require('./components/TextInput.vue').default);
 Vue.component('xbutton', require('./components/Button.vue').default);
 Vue.component('select-input', require('./components/SelectInput.vue').default);
+Vue.component('checkbox', require('./components/Checkbox.vue').default);
+Vue.component('file-input', require('./components/FileInput.vue').default);
 
 // Pages
 Vue.component('addon-pack-template-generator', require('./pages/AddonPackTemplateGenerator.vue').default);

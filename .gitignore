@@ -13,3 +13,4 @@ npm-debug.log
 yarn-error.log
 laradock/
 storage/mod_import_cache/
+/storage/cache
