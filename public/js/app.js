@@ -4408,11 +4408,11 @@ __webpack_require__.r(__webpack_exports__);
           url += "".concat(inputKey, "=").concat(encodeURIComponent(this.input[inputKey]));
         }
       }
+      console.log(url);
       window.location = url;
     },
     save: function save() {
       var _this = this;
-      console.log(this.input);
       this.errors.name = !this.input.name ? ['Name is required!'] : undefined;
       this.errors.version = !this.input.version ? ['Version is required!'] : undefined;
       this.errors.pack_id = !this.input.pack_id ? ['Pack ID is required!'] : undefined;
@@ -4795,7 +4795,7 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_c("heading", [_vm._v("\n        Addon Pack Template Generator\n    ")]), _vm._v(" "), _c("div", {
+  return _c("div", [_c("heading", [_vm._v("\n            Addon Pack Template Generator\n        ")]), _vm._v(" "), _c("div", {
     staticClass: "grid gap-6 mb-6 md:grid-cols-2"
   }, [_c("text-input", {
     attrs: {
@@ -4853,19 +4853,7 @@ var render = function render() {
       },
       expression: "input.description"
     }
-  })], 1), _vm._v(" "), _c("file-input", {
-    staticClass: "mb-4",
-    attrs: {
-      id: "logo",
-      label: "Logo",
-      accept: "image/png"
-    },
-    on: {
-      onChange: function onChange(f) {
-        return _vm.input.logo = f;
-      }
-    }
-  }), _vm._v(" "), _c("sub-heading", [_vm._v("Advanced")]), _vm._v(" "), _c("checkbox", {
+  })], 1), _vm._v(" "), _c("sub-heading", [_vm._v("Advanced")]), _vm._v(" "), _c("checkbox", {
     staticClass: "mb-2",
     attrs: {
       id: "forge_support",
@@ -4897,10 +4885,10 @@ var render = function render() {
   }), _vm._v(" "), _c("div", {
     staticClass: "hidden"
   }, _vm._l(this.errors, function (error) {
-    return _c("p", [_vm._v("\n            " + _vm._s(error) + "\n        ")]);
+    return _c("p", [_vm._v("\n                " + _vm._s(error) + "\n            ")]);
   }), 0), _vm._v(" "), _c("div", {
     staticClass: "text-sm mb-5 text-red-700"
-  }, [_vm._v("\n        *Required\n    ")]), _vm._v(" "), _c("xbutton", {
+  }, [_vm._v("\n            *Required\n        ")]), _vm._v(" "), _c("xbutton", {
     on: {
       click: _vm.save
     }

@@ -100,8 +100,8 @@ export default {
                         placeholder="Short Description of Addon Pack" required/>
         </div>
 
-        <file-input id="logo" @onChange="f => input.logo = f" label="Logo" accept="image/png"
-                    class="mb-4"></file-input>
+<!--        <file-input id="logo" @onChange="f => input.logo = f" label="Logo" accept="image/png"-->
+<!--                    class="mb-4"></file-input>-->
 
         <sub-heading>Advanced</sub-heading>
 
