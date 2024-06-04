@@ -47,7 +47,7 @@ class TemplateGeneratorController extends Controller
         $zip->addEmptyDir("addon/$packId/blocks");
         $zip->addEmptyDir("addon/$packId/creative_mode_tabs");
         $zip->addEmptyDir("addon/$packId/items");
-        $zip->addEmptyDir("addon/$packId/kube_js_scripts");
+        $zip->addEmptyDir("addon/$packId/kubejs_scripts");
         $zip->addEmptyDir("addon/$packId/particle_types");
         $zip->addEmptyDir("addon/$packId/poi_types");
         $zip->addEmptyDir("addon/$packId/suit_sets");
