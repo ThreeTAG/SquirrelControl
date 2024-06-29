@@ -30,6 +30,11 @@ return [
             'modrinth_id' => 'SIKMQqt0',
             'color' => '#f9dd55',
         ],
+        'triadtech' => [
+            'curseforge_id' => 1053056,
+            'modrinth_id' => 'fQMVANbQ',
+            'color' => '#59ecff',
+        ],
     ]
 
 ];
