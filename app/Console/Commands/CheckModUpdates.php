@@ -177,6 +177,7 @@ class CheckModUpdates extends Command
 
                 $discord->getChannel(config('mods.channel_id'))->sendMessage(
                     MessageBuilder::new()
+                        ->setContent('<@&' . config('mods.notification_role_id') . '>')
                         ->addEmbed($embed)
                         ->addComponent($modrinthRow)
                         ->addComponent($curseForgeRow)

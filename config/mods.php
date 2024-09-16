@@ -10,6 +10,8 @@ return [
 
     'channel_id' => env('MOD_UPDATE_CHANNEL_ID'),
 
+    'notification_role_id' => env('MOD_UPDATE_NOTIFICATION_ROLE_ID'),
+
     'modrinth_emoji' => env('MOD_UPDATE_MODRINTH_EMOJI'),
 
     'curseforge_emoji' => env('MOD_UPDATE_CURSEFORGE_EMOJI'),
