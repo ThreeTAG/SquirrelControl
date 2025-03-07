@@ -33,6 +33,7 @@ Vue.component('file-input', require('./components/FileInput.vue').default);
 
 // Pages
 Vue.component('addon-pack-template-generator', require('./pages/AddonPackTemplateGenerator.vue').default);
+Vue.component('claim-reward', require('./pages/ClaimReward.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

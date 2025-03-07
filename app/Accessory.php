@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read int id
  * @property string name
  */
-class Accessoire extends Model
+class Accessory extends Model
 {
     public $timestamps = false;
 

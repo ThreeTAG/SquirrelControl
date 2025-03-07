@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Accessoire;
-use App\AccessoireSet;
-use App\Http\Helpers\MinecraftPlayerHelper;
-use App\MinecraftPlayer;
+use App\Accessory;
+use App\AccessorySet;
 use App\Permission;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -14,7 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 
-class AccessoireSetController extends Controller
+class AccessorySetController extends Controller
 {
     /**
      * AccessoireController constructor.
@@ -29,11 +27,11 @@ class AccessoireSetController extends Controller
      *
      * @return Application|Factory|View
      */
-    public function index()
+    public function index(): Factory|View|Application
     {
-        $sets = AccessoireSet::query()->paginate(20);
+        $sets = AccessorySet::query()->paginate(20);
 
-        return view('accessoire_sets.index', compact('sets'));
+        return view('accessory_sets.index', compact('sets'));
     }
 
     /**
@@ -44,19 +42,19 @@ class AccessoireSetController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        AccessoireSet::create(['name' => $request->get('name')]);
-        Session::flash('success', 'Accessoire Set added!');
+        AccessorySet::query()->create(['name' => $request->get('name')]);
+        Session::flash('success', 'Accessory Set added!');
 
-        return redirect()->route('accessoires.sets.index');
+        return redirect()->route('accessories.sets.index');
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param AccessoireSet $set
+     * @param AccessorySet $set
      * @return Application|Factory|View
      */
-    public function edit(AccessoireSet $set)
+    public function edit(AccessorySet $set): Factory|View|Application
     {
         // map function for the vue-treeselect
         $mapForTreeSelect = function ($model) {
@@ -66,26 +64,26 @@ class AccessoireSetController extends Controller
             ];
         };
 
-        $allAccessoires = Accessoire::all()->map($mapForTreeSelect);
-        $setAccessoires = $set->accessoires->map($mapForTreeSelect)->pluck('id');
+        $allAccessories = Accessory::all()->map($mapForTreeSelect);
+        $setAccessories = $set->accessories->map($mapForTreeSelect)->pluck('id');
 
-        return view('accessoire_sets.edit', compact('set', 'allAccessoires', 'setAccessoires'));
+        return view('accessory_sets.edit', compact('set', 'allAccessories', 'setAccessories'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param AccessoireSet $set
+     * @param AccessorySet $set
      * @return RedirectResponse
      */
-    public function update(Request $request, AccessoireSet $set): RedirectResponse
+    public function update(Request $request, AccessorySet $set): RedirectResponse
     {
-        $set->accessoires()->sync($request->get('accessoires'));
-        $set->update(['name' => $request->get('name')]);
+        $set->accessories()->sync($request->get('accessories'));
+        $set->update(['name' => $request->get('name'), 'is_reward' => $request->get('is_reward', false)]);
 
-        Session::flash('success', 'Accessoire Set ' . $set->name . ' updated!');
+        Session::flash('success', 'Accessory Set ' . $set->name . ' updated!');
 
-        return redirect()->route('accessoires.sets.index');
+        return redirect()->route('accessories.sets.index');
     }
 }

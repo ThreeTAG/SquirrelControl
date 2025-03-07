@@ -58,11 +58,11 @@
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                        aria-haspopup="true"
                        aria-expanded="false">
-                        Accessoires
+                        Accessories
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{!! route('accessoires.index') !!}">Accessoires</a>
-                        <a class="dropdown-item" href="{!! route('accessoires.sets.index') !!}">Accessoire Sets</a>
+                        <a class="dropdown-item" href="{!! route('accessories.index') !!}">Accessories</a>
+                        <a class="dropdown-item" href="{!! route('accessories.sets.index') !!}">Accessory Sets</a>
                     </div>
                 </li>
             @endif

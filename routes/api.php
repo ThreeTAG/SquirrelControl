@@ -18,3 +18,4 @@ Route::get('/player/{uuid}', 'MinecraftPlayerController@getData');
 Route::get('/legacy/data', 'MinecraftPlayerController@getLegacyData');
 Route::post('/mod-update-post', 'ModUpdatePostController@store');
 Route::get('/forge_updates/{mod}', 'ForgeUpdateJsonController@updateJson');
+Route::post('/webhook/rewards', 'WebhookController@rewards')->name('webhook.rewards');

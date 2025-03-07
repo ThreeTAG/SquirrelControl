@@ -12,7 +12,7 @@ use Illuminate\Support\Collection;
  * @property-read $int id
  * @property $string name
  * @property boolean $mod_access
- * @property-read Accessoire[]|Collection accessoires
+ * @property-read Accessory[]|Collection accessoires
  */
 class PatronTier extends Model
 {
@@ -23,6 +23,6 @@ class PatronTier extends Model
 
     public function accessoires(): BelongsToMany
     {
-        return $this->morphToMany(Accessoire::class, 'accessoire_holder');
+        return $this->morphToMany(Accessory::class, 'accessoire_holder');
     }
 }

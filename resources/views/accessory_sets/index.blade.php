@@ -5,19 +5,19 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card bg-light">
-                    <h3 class="card-header">Accessoire Sets</h3>
+                    <h3 class="card-header">Accessory Sets</h3>
 
                     <div class="card-body">
 
                        @include('partials.error-success-info')
 
-                        <form action="{!! route('accessoires.sets.store') !!}" method="POST">
+                        <form action="{!! route('accessories.sets.store') !!}" method="POST">
                             @csrf
 
                             <div class="row">
                                 <div class="col-md-5 mb-3 form-group">
                                     <div class="floating-label textfield-box">
-                                        <label for="name">Add Accessoire Set</label>
+                                        <label for="name">Add Accessory Set</label>
                                         <input class="form-control" id="name" name="name"
                                                placeholder="Name" type="text">
                                     </div>
@@ -38,7 +38,7 @@
                             <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Accessoires</th>
+                                <th>Accessories</th>
                                 <th></th>
                             </tr>
                             </thead>
@@ -46,8 +46,8 @@
                             @foreach($sets as $set)
                                 <tr>
                                     <td>{!! $set->name !!}</td>
-                                    <td>{!! $set->accessoires->count() !!}</td>
-                                    <td><a class="btn btn-primary" href="{!! route('accessoires.sets.edit', ['set' => $set->id]) !!}">Manage</a></td>
+                                    <td>{!! $set->accessories->count() !!}</td>
+                                    <td><a class="btn btn-primary" href="{!! route('accessories.sets.edit', ['set' => $set->id]) !!}">Manage</a></td>
                                 </tr>
                             @endforeach
                             </tbody>

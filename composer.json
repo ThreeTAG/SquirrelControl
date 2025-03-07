@@ -9,8 +9,10 @@
     "license": "MIT",
     "require": {
         "php": "^8.0",
+        "ext-zip": "*",
         "aternos/curseforge-api": "^1.0",
         "aternos/modrinth-api": "^1.0",
+        "doctrine/dbal": "~2.3",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
@@ -22,8 +24,7 @@
         "soatok/patreon": "dev-master",
         "spatie/laravel-permission": "^4.2",
         "team-reflex/discord-php": "7.3.4",
-        "thedudeguy/rcon": "^1.0",
-        "ext-zip": "*"
+        "thedudeguy/rcon": "^1.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

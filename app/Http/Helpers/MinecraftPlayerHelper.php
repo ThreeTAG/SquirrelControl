@@ -14,7 +14,7 @@ class MinecraftPlayerHelper
      * @return MinecraftPlayer
      * @throws Exception
      */
-    public static function getMinecraftPlayer($name)
+    public static function getMinecraftPlayer($name): MinecraftPlayer
     {
         if (strlen($name) > 16) {
             if (MojangAPI::isValidUuid($name)) {
@@ -22,10 +22,11 @@ class MinecraftPlayerHelper
                 $username = MojangAPI::getUsername($uuid);
 
                 if ($username) {
-                    $player = MinecraftPlayer::where('uuid', $uuid)->first();
+                    /** @var MinecraftPlayer $player */
+                    $player = MinecraftPlayer::query()->where('uuid', $uuid)->first();
 
                     if (!$player) {
-                        $player = MinecraftPlayer::create([
+                        $player = MinecraftPlayer::query()->create([
                             'name' => $username,
                             'uuid' => $uuid,
                         ]);
@@ -46,10 +47,11 @@ class MinecraftPlayerHelper
 
             if ($uuid) {
                 $uuid = MojangAPI::formatUuid($uuid);
-                $player = MinecraftPlayer::where('uuid', $uuid)->first();
+                /** @var MinecraftPlayer $player */
+                $player = MinecraftPlayer::query()->where('uuid', $uuid)->first();
 
                 if (!$player) {
-                    $player = MinecraftPlayer::create([
+                    $player = MinecraftPlayer::query()->create([
                         'name' => MojangAPI::getUsername($uuid),
                         'uuid' => $uuid,
                     ]);

@@ -14,9 +14,9 @@ use Illuminate\Support\Collection;
  * @property-read int $id
  * @property string $name
  * @property string $uuid
- * @property-read Accessoire[]|Collection $accessoires
- * @property-read AccessoireSet[]|Collection $accessoireSets
- * @property-read Accessoire[]|Collection $allAccessoires
+ * @property-read Accessory[]|Collection $accessories
+ * @property-read AccessorySet[]|Collection $accessorySets
+ * @property-read Accessory[]|Collection $allAccessories
  * @property-read ModSupporterData|null $modSupporterData
  * @property-read CraftfallData|null $craftfallData
  * @property-read Patron|null $patron
@@ -28,25 +28,25 @@ class MinecraftPlayer extends Model
         'uuid',
     ];
 
-    public function accessoires(): MorphToMany
+    public function accessories(): MorphToMany
     {
-        return $this->morphToMany(Accessoire::class, 'accessoire_holder');
+        return $this->morphToMany(Accessory::class, 'accessory_holder');
     }
 
-    public function accessoireSets(): BelongsToMany
+    public function accessorySets(): BelongsToMany
     {
-        return $this->belongsToMany(AccessoireSet::class, 'minecraft_player_has_accessoire_sets');
+        return $this->belongsToMany(AccessorySet::class, 'minecraft_player_has_accessory_sets');
     }
 
-    public function getAllAccessoiresAttribute()
+    public function getAllAccessoriesAttribute()
     {
-        $accessoires = $this->morphToMany(Accessoire::class, 'accessoire_holder')->get();
+        $accessoires = $this->morphToMany(Accessory::class, 'accessory_holder')->get();
 
         if ($this->patron && $this->patron->tier) {
             $accessoires = $accessoires->merge($this->patron->tier->accessoires);
         }
 
-        foreach ($this->accessoireSets as $accessoireSet) {
+        foreach ($this->accessorySets as $accessoireSet) {
             $accessoires = $accessoires->merge($accessoireSet->accessoires);
         }
 

@@ -5,19 +5,19 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card bg-light">
-                    <h3 class="card-header">Accessoires</h3>
+                    <h3 class="card-header">Accessories</h3>
 
                     <div class="card-body">
 
                         @include('partials.error-success-info')
 
-                        <form action="{!! route('accessoires.store') !!}" method="POST">
+                        <form action="{!! route('accessories.store') !!}" method="POST">
                             @csrf
 
                             <div class="row">
                                 <div class="col-md-5 mb-3 form-group">
                                     <div class="floating-label textfield-box">
-                                        <label for="name">Add Accessoire</label>
+                                        <label for="name">Add Accessory</label>
                                         <input class="form-control" id="name" name="name"
                                                placeholder="ID" type="text">
                                     </div>
@@ -40,11 +40,11 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($accessoires as $accessoire)
+                            @foreach($accessories as $accessory)
                                 <tr>
-                                    <td>{!! $accessoire->name !!}</td>
+                                    <td>{!! $accessory->name !!}</td>
                                     <td>
-                                        <form action="{!! route('accessoires.destroy', compact('accessoire')) !!}"
+                                        <form action="{!! route('accessories.destroy', compact('accessory')) !!}"
                                               method="POST">
                                             @csrf
                                             <button class="btn btn-danger" type="submit">Delete</button>
