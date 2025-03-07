@@ -7,6 +7,7 @@ use App\Notifications\ClaimRewardNotification;
 use App\RewardClaimToken;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
 
@@ -17,6 +18,7 @@ class WebhookController extends Controller
     {
         if ($request->get('verification_token') !== config('kofi.webhook_verification_token')
             || !in_array($request->get('type'), ['Donation', 'Subscription'])) {
+            Log::warning('Invalid Ko-fi webhook: ' . print_r($request->all(), true));
             return response()->json([], 401);
         }
 
