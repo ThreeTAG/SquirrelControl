@@ -16,13 +16,16 @@ class WebhookController extends Controller
 
     public function rewards(Request $request): JsonResponse
     {
-        if ($request->get('verification_token') !== config('kofi.webhook_verification_token')
-            || !in_array($request->get('type'), ['Donation', 'Subscription'])) {
-            Log::warning('Invalid Ko-fi webhook: ' . print_r($request->all(), true));
+        $data = $request->get('data', '{}');
+        $data = json_decode($data);
+
+        if (data_get($data, 'verification_token') !== config('kofi.webhook_verification_token')
+            || !in_array(data_get($data, 'type'), ['Donation', 'Subscription'])) {
+            Log::warning('Invalid Ko-fi webhook: ' . print_r($data, true));
             return response()->json([], 401);
         }
 
-        $email = $request->get('email');
+        $email = data_get($data, 'email');
 
         // Delete any unclaimed
         RewardClaimToken::query()->where('email', $email)->whereNull('minecraft_player_id')->delete();
