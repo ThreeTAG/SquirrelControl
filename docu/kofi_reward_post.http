@@ -1,0 +1,23 @@
+### Send POST request to create address
+POST {{host}}/api/webhook/rewards HTTP/1.1
+Content-Type: application/json
+
+{
+    "verification_token": "example_verification_token",
+    "message_id": "890d24c0-ac12-4891-83cc-88d8c9cfce45",
+    "timestamp": "2025-03-07T18:49:27Z",
+    "type": "Donation",
+    "is_public": true,
+    "from_name": "Jo Example",
+    "message": "Good luck with the integration!",
+    "amount": "3.00",
+    "url": "https://ko-fi.com/Home/CoffeeShop?txid=00000000-1111-2222-3333-444444444444",
+    "email": "jo.example@example.com",
+    "currency": "USD",
+    "is_subscription_payment": false,
+    "is_first_subscription_payment": false,
+    "kofi_transaction_id": "00000000-1111-2222-3333-444444444444",
+    "shop_items": null,
+    "tier_name": null,
+    "shipping": null
+}

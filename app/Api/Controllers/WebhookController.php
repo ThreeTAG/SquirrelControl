@@ -3,9 +3,11 @@
 namespace App\Api\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Notifications\ClaimRewardNotification;
 use App\RewardClaimToken;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
 
 class WebhookController extends Controller
@@ -29,13 +31,18 @@ class WebhookController extends Controller
         }
 
         // Create new token
+        /** @var RewardClaimToken $reward */
         $reward = RewardClaimToken::query()->create([
             'email' => $email,
             'token' => $this->generateToken(),
         ]);
 
         // Send mail
+        if (str_ends_with($email, '@example.com')) {
+            $email = 'lucas@threetag.net';
+        }
 
+        Notification::route('mail', $email)->notify(new ClaimRewardNotification($reward->token));
 
         return response()->json(['message' => 'Reward claim mail sent'], 201);
     }
