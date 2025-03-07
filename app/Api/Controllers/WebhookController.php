@@ -45,6 +45,7 @@ class WebhookController extends Controller
         }
 
         Notification::route('mail', $email)->notify(new ClaimRewardNotification($reward->token));
+        Log::info('Sent reward email to ' . $email);
 
         return response()->json(['message' => 'Reward claim mail sent'], 201);
     }
