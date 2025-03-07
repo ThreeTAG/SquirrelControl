@@ -33,19 +33,22 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/minecraft-players/{player}', 'MinecraftPlayerController@edit')->name('minecraft-players.edit');
     Route::post('/minecraft-players/{player}', 'MinecraftPlayerController@update')->name('minecraft-players.update');
 
+    Route::get('/rewards/{token}', 'RewardController@view')->name('rewards.view');
+    Route::post('/rewards/{token}/confirm', 'RewardController@claim')->name('rewards.claim');
+
     Route::get('/patreon', 'PatreonController@index')->name('patreon.index');
     Route::get('/patreon/tier/{tier}', 'PatreonController@editTier')->name('patreon.tier.edit');
     Route::post('/patreon/tier/{tier}', 'PatreonController@updateTier')->name('patreon.tier.update');
     Route::post('/patreon/patron/{patron}', 'PatreonController@updatePatronPlayer')->name('patreon.patron.update');
 
-    Route::get('/accessoires', 'AccessoireController@index')->name('accessoires.index');
-    Route::post('/accessoires/add', 'AccessoireController@store')->name('accessoires.store');
-    Route::post('/accessoires/{accessoire}/delete', 'AccessoireController@destroy')->name('accessoires.destroy');
+    Route::get('/accessories', 'AccessoryController@index')->name('accessories.index');
+    Route::post('/accessories/add', 'AccessoryController@store')->name('accessories.store');
+    Route::post('/accessories/{accessory}/delete', 'AccessoryController@destroy')->name('accessories.destroy');
 
-    Route::get('/accessoires/sets', 'AccessoireSetController@index')->name('accessoires.sets.index');
-    Route::post('/accessoires/sets/add', 'AccessoireSetController@store')->name('accessoires.sets.store');
-    Route::get('/accessoires/sets/{set}', 'AccessoireSetController@edit')->name('accessoires.sets.edit');
-    Route::post('/accessoires/sets/{set}', 'AccessoireSetController@update')->name('accessoires.sets.update');
+    Route::get('/accessories/sets', 'AccessorySetController@index')->name('accessories.sets.index');
+    Route::post('/accessories/sets/add', 'AccessorySetController@store')->name('accessories.sets.store');
+    Route::get('/accessories/sets/{set}', 'AccessorySetController@edit')->name('accessories.sets.edit');
+    Route::post('/accessories/sets/{set}', 'AccessorySetController@update')->name('accessories.sets.update');
 
     Route::prefix('craftfall')->name('craftfall.')->group(function () {
         Route::get('/', 'HomeController@craftfall')->name('home');

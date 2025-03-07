@@ -11,7 +11,7 @@
 
                         @include('partials.errors')
 
-                        <form action="{!! route('accessoires.sets.update', ['set' => $set->id]) !!}"
+                        <form action="{!! route('accessories.sets.update', ['set' => $set->id]) !!}"
                               method="POST">
                             @csrf
 
@@ -23,13 +23,19 @@
                                 </div>
                             </div>
 
+                            <div class="">
+                                <label for="is_reward">Is Reward</label>
+                                <input class="form-control" id="is_reward" name="is_reward" value="1"
+                                       type="checkbox" @if($set->is_reward) checked @endif>
+                            </div>
+
                             <div class="form-group">
-                                <label for="accessoires">Accessoires:</label>
+                                <label for="accessoires">Accessories:</label>
                                 <multi-select
-                                    id="accessoires"
-                                    name="accessoires[]"
-                                    :options="{{$allAccessoires}}"
-                                    :value="{{$setAccessoires}}"
+                                    id="accessories"
+                                    name="accessories[]"
+                                    :options="{{$allAccessories}}"
+                                    :value="{{$setAccessories}}"
                                 >
                                 </multi-select>
                             </div>

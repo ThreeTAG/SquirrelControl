@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Accessoire;
-use App\AccessoireSet;
+use App\Accessory;
+use App\AccessorySet;
 use App\Http\Helpers\MinecraftPlayerHelper;
 use App\Http\Helpers\MojangAPI;
 use App\MinecraftPlayer;
@@ -89,11 +89,11 @@ class MinecraftPlayerController extends Controller
                 'label' => $model->name
             ];
         };
-        $allAccessoires = Accessoire::all()->map($mapForTreeSelect);
-        $playerAccessoires = $player->accessoires->map($mapForTreeSelect)->pluck('id');
+        $allAccessoires = Accessory::all()->map($mapForTreeSelect);
+        $playerAccessoires = $player->accessories->map($mapForTreeSelect)->pluck('id');
 
-        $allAccessoireSets = AccessoireSet::all()->map($mapForTreeSelect);
-        $playerAccessoireSets = $player->accessoireSets->map($mapForTreeSelect)->pluck('id');
+        $allAccessoireSets = AccessorySet::all()->map($mapForTreeSelect);
+        $playerAccessoireSets = $player->accessorySets->map($mapForTreeSelect)->pluck('id');
 
         return view('minecraft_players.edit', compact('player', 'allAccessoires', 'playerAccessoires', 'allAccessoireSets', 'playerAccessoireSets'));
     }
@@ -107,8 +107,8 @@ class MinecraftPlayerController extends Controller
      */
     public function update(Request $request, MinecraftPlayer $player)
     {
-        $player->accessoires()->sync($request->get('accessoires'));
-        $player->accessoireSets()->sync($request->get('accessoire_sets'));
+        $player->accessories()->sync($request->get('accessoires'));
+        $player->accessorySets()->sync($request->get('accessoire_sets'));
 
         $player->getOrCreateModSupporterData()->update([
             'mod_access' => $request->get('mod_access'),

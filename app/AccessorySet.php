@@ -11,18 +11,24 @@ use Illuminate\Support\Collection;
  * @package App
  * @property-read int $id
  * @property string $name
- * @property-read Accessoire[]|Collection $accessoires
+ * @property bool $is_reward
+ * @property-read Accessory[]|Collection $accessories
  */
-class AccessoireSet extends Model
+class AccessorySet extends Model
 {
     public $timestamps = false;
 
     protected $fillable = [
         'name',
+        'is_reward',
     ];
 
-    public function accessoires(): BelongsToMany
+    protected $casts = [
+        'is_reward' => 'boolean',
+    ];
+
+    public function accessories(): BelongsToMany
     {
-        return $this->morphToMany(Accessoire::class, 'accessoire_holder');
+        return $this->morphToMany(Accessory::class, 'accessory_holder');
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Accessoire;
+use App\Accessory;
 use App\Http\Helpers\MinecraftPlayerHelper;
 use App\Http\Helpers\MojangAPI;
 use App\MinecraftPlayer;
@@ -66,7 +66,7 @@ class PatreonController extends Controller
             ];
         };
 
-        $allAccessoires = Accessoire::all()->map($mapForTreeSelect);
+        $allAccessoires = Accessory::all()->map($mapForTreeSelect);
         $tierAccessoires = $tier->accessoires->map($mapForTreeSelect)->pluck('id');
 
         return view('patreon.edit_tier', compact('tier', 'allAccessoires', 'tierAccessoires'));
