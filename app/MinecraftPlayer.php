@@ -47,7 +47,7 @@ class MinecraftPlayer extends Model
         }
 
         foreach ($this->accessorySets as $accessoireSet) {
-            $accessoires = $accessoires->merge($accessoireSet->accessoires);
+            $accessoires = $accessoires->merge($accessoireSet->accessories);
         }
 
         return $accessoires->unique('id');
