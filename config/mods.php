@@ -37,6 +37,11 @@ return [
             'modrinth_id' => 'fQMVANbQ',
             'color' => '#59ecff',
         ],
+        'it_follows' => [
+            'curseforge_id' => 1363299,
+            'modrinth_id' => 'j0Iz4kda',
+            'color' => '#001f4e',
+        ],
     ]
 
 ];
