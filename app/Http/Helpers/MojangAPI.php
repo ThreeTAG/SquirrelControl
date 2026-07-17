@@ -729,7 +729,12 @@ class MojangAPI
 
             return $output;
         } else {
-            return @file_get_contents($url);
+            $context = stream_context_create([
+                'http' => [
+                    'timeout' => 5,
+                ],
+            ]);
+            return @file_get_contents($url, false, $context);
         }
     }
 

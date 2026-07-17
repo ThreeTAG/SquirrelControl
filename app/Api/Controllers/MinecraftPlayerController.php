@@ -31,7 +31,7 @@ class MinecraftPlayerController extends Controller
     {
         $supporters = [];
 
-        foreach (MinecraftPlayer::all() as $player) {
+        foreach (MinecraftPlayer::with(['modSupporterData', 'patron.tier'])->get() as $player) {
             if ($player->hasModAccess() || $player->getOrCreateModSupporterData()->cloak_path) {
                 $data = [
                     'name' => $player->name,
